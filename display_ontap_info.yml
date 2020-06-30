@@ -4,7 +4,7 @@
     collections:
     - netapp.ontap
     tasks:
-    - name: Display ONTAP_info: All 
+    - name: Display ONTAP_info All 
       na_ontap_info:
         state: info
         hostname: "{{ netapp_hostname }}"
