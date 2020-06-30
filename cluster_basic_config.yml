@@ -26,36 +26,11 @@
   # Standard Cluster configuration section
   ###
 
+  # Nothing here - Managed seperately
     
   ###
   # Standard SVM configuration section
   ###
   
-  # Managing Export-policies
+  # Nothing here - Managed seperately
   
-    - name: Create Data SVM Export-policy
-      na_ontap_export_policy:
-        state: "{{ state }}"
-        name: "{{ svm_export_policy_name }}"
-        vserver: "{{ svm }}"
-        hostname: "{{ hostname }}"
-        username: "{{ netapp_username }}"
-        password: "{{ netapp_password }}"
-        https: true
-        validate_certs: false
-    - name: Setup "Default" and SVM Export-policies
-      na_ontap_export_policy_rule:
-        state: "{{ state }}"
-        policy_name: "{{ item.name }}"
-        vserver: "{{ svm }}"
-        client_match: "{{ item.client_match }}"
-        ro_rule: "{{ item.ro_rule }}"
-        rw_rule: "{{ item.rw_rule }}"
-        rule_index: "{{ item.rule_index }}"
-        super_user_security: "{{ item.super_user_security }}"
-        hostname: "{{ hostname }}"
-        username: "{{ netapp_username }}"
-        password: "{{ netapp_password }}"
-        https: true
-        validate_certs: false
-      with_items: "{{ export_policy_rules_list }}"
