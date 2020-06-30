@@ -1,0 +1,70 @@
+---
+- hosts: localhost
+    gather_facts: false
+    vars:
+        state: present
+    tasks:
+    - name: Create Policy
+        na_ontap_export_policy:
+        state: "{{ state }}"
+        name: "{{ volname }}"
+        vserver: "{{ vserver }}"
+        hostname: "{{ hostname }}"
+        username: "{{ netapp_username }}"
+        password: "{{ netapp_password }}"
+        https: true
+        validate_certs: false
+    ###
+    # Renaming section
+    ###
+    
+    # This renames: nodenames, root aggregates, and root volumes.
+    # This isn't required. However, naming conventiones may require it.
+    # Here is how it can be accomplished:
+    
+    
+    # Rename root volume section - Ex: cluster_02_vol0 to cluster_02_root
+    # This can be useful as the first node in the cluster
+    # can have a different naming scheme
+    
+    - name: rename root volumes
+      na_ontap_volume:
+        state: present
+        from_name: "{{ item.name }}"
+        name: "{{ item.rename }}"
+        vserver: "{{ item.vserver }}"
+        #comment: "{{ item.comment }}"
+        hostname: "{{ hostname }}"
+        username: "{{ netapp_username }}"
+        password: "{{ netapp_password }}"
+        https: true
+        validate_certs: false
+      with_items: "{{ vol0_list }}"
+    
+    # Rename root aggregate section - Ex: aggr0_cluster_01 to clusterh01a_aggr0
+    
+    - name: rename root aggregates
+      na_ontap_aggregate:
+        state: present
+        service_state: online
+        from_name: "{{ item.name }}"
+        name: "{{ item.rename }}"
+        hostname: "{{ hostname }}"
+        username: "{{ netapp_username }}"
+        password: "{{ netapp_password }}"
+        https: true
+        validate_certs: false
+      with_items: "{{ aggr_list }}"
+    
+    # Rename node section - Ex: cluster-01 to clusterh01a
+    
+    - name: rename node
+      na_ontap_node:
+        from_name: "{{ item.from_name }}"
+        name: "{{ item.name }}"
+        hostname: "{{ hostname }}"
+        username: "{{ netapp_username }}"
+        password: "{{ netapp_password }}"
+        https: true
+        validate_certs: false
+      with_list: "{{ node_names }}"
