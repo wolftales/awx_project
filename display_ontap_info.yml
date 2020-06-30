@@ -13,5 +13,5 @@
         https: true
         validate_certs: false
       register: ontap_info
-      - debug:
-          msg: "{{ ontap_info.ontap_info }}"
+    - debug:
+        msg: "{{ ontap_info.ontap_info }}"
