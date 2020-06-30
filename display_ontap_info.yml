@@ -3,10 +3,6 @@
     gather_facts: false
     vars_files:
     - test_vars.yml
-    vars_prompt:
-    - name: "netapp_password"
-        prompt: "Enter the NetApp Admin Password"
-        private: yes
     collections:
     - netapp.ontap
     tasks:
