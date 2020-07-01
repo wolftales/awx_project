@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  collections:
+  - netapp.ontap
+  gather_facts: no
+  name: Vserver Config
+  vars:
+      state: present
+  vars_files:
+  - standard_platform_vars.yml
+  - specific_config_vars.yml
+
+  roles:
+  - na_ontap_vserver_create
+
+  

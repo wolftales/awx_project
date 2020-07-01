@@ -5,7 +5,7 @@
     state: present
   tasks:
     
-    # Manage Export-policies - Create 'data' policy
+  # Manage Export-policies - Create 'data' policy
   - name: Create Data SVM Export-policy
     na_ontap_export_policy:
       state: "{{ state }}"
@@ -16,6 +16,7 @@
       password: "{{ netapp_password }}"
       https: true
       validate_certs: false
+  
   # Manage Export-policies - Add rules
   - name: Setup "Default" and SVM Export-policies
     na_ontap_export_policy_rule:
