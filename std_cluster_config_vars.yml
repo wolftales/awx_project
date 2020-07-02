@@ -45,7 +45,7 @@ ifgrps: # Create and add ports to Interface Groups.
     - { name: a0a, node: "{{ cluster }}-01", ports: "{{ ifgrp_ports }}", mode: multimode_lacp, mtu: 1500 }
 
 vlans:  # Create vlans on LIFS
-    - { id: "{{ vlan_id }}", node: "{{ cluster }}-01", port: a0a }
+    - { id: "{{ vlan_id }}", node: "{{ cluster }}-01", parent: a0a }
 
 bcasts: # Create Broadcast domains
     - { name: Data, mtu: 1500, ipspace: default, ports: '{{ cluster }}-01:a0a,{{ cluster }}-01:a0a-201' }

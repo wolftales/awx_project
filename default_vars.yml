@@ -10,7 +10,7 @@ svm_address: 192.168.7.193
 validate_certs: false
 dns_domain: example.local
 dns_servers: 192.168.7.3
-server_name: time.example.local  # NTP Server name
+ntp_srvr: time.example.local  # NTP Server name
 ifgrp_ports: "e0e,e0f"
 vlan_id: 201  # Create vlans on LIFS
 
