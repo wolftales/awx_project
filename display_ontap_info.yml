@@ -12,7 +12,7 @@
       password: "{{ netapp_password }}"
       https: true
       validate_certs: false
-      use_rest: auto
+      use_rest: Auto
       gather_subset:
         - all
         # - volume_info
