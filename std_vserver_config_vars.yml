@@ -3,15 +3,15 @@
 ###
 
 vservers:   # Vservers to create
-- { name: "{{ svm }}", aggr: "{{ svm_aggregate }}", protocol: nfs }
+  - { name: "{{ svm }}", aggr: "{{ svm_aggregate }}", protocol: nfs }
 
 # vserver_dns can't communicate off local subnet due to a race condition
 vserver_dns:    # DNS at the Vserver level.
 # - { vserver: "{{ svm }}", dns_domains: "{{ svm_dns_domain }}", dns_nameservers: "{{ svm_dns_servers }}" }
-- { vserver: "{{ svm }}", dns_domains: "{{ dns_domain }}", dns_nameservers: "{{ dns_servers }}" 
+  - { vserver: "{{ svm }}", dns_domains: "{{ dns_domain }}", dns_nameservers: "{{ dns_servers }}" }
 
 lifs:   # interfaces for the Vservers being created
-- { name: "{{ svm }}_data_lif", vserver: "{{ svm }}", node: "{{ cluster }}-01", port: "{{ svm_port }}", protocol: nfs, address: "{{ svm_address }}", netmask: "{{ svm_netmask }}" }
+  - { name: "{{ svm }}_data_lif", vserver: "{{ svm }}", node: "{{ cluster }}-01", port: "{{ svm_port }}", protocol: nfs, address: "{{ svm_address }}", netmask: "{{ svm_netmask }}" }
 
 gateway:    # To configure the default route/gateway for the vservers
-- { vserver: "{{ svm }}", destination: 0.0.0.0/0, gateway: "{{ svm_gateway }}" }
+  - { vserver: "{{ svm }}", destination: 0.0.0.0/0, gateway: "{{ svm_gateway }}" }
