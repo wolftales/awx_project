@@ -24,7 +24,7 @@
       junction_path: "{{ '' if not export_policy else '/volname' }}"
       space_guarantee: "none"
       vserver: "{{ vserver }}"
-      hostname: "{{ hostname }}"
+      hostname: "{{ netapp_hostname }}"
       username: "{{ netapp_username }}"
       password: "{{ netapp_password }}"
       https: true
