@@ -13,7 +13,7 @@
       ro_rule: "{{ ro_rule }}"
       rw_rule: "{{ rw_rule }}"
       super_user_security: "{{ su_rule }}"
-      hostname: "{{ hostname }}"
+      hostname: "{{ netapp_hostname }}"
       username: "{{ netapp_username }}"
       password: "{{ netapp_password }}"
       https: true
