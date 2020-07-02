@@ -1,5 +1,5 @@
 ---
-    - hosts: all
+    - hosts: clients
       vars:
         - ansible_password: 'xAnsible01!'
       gather_facts: no
