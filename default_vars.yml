@@ -1,0 +1,33 @@
+# AWX Survey - Source/Destination
+
+cluster: {select}
+netapp_hostname: {select}
+
+inters_lif1: 192.168.7.192
+svm_address: 192.168.7.193
+
+# AWX extra vars for var_file
+validate_certs: false
+dns_domains: example.local
+dns_nameservers: 192.168.7.3
+server_name: time.example.local  # NTP Server name
+ifgrp_ports: "e0e,e0f"
+vlan_id: 201  # Create vlans on LIFS
+
+inters_lif1_mask: 255.255.255.0
+
+
+# Vservers to create
+svm: destination
+svm_aggregate: "{{ cluster }}_01_aggr1"
+
+# vserver_dns can't communicate off local subnet due to a race condition
+# svm_dns_domain: "{{ dns_domain }}"  # DNS at the Vserver level.
+# svm_dns_servers: "{{ dns_servers }}"  # BUG: Can't use the cluster DNS servers
+
+# interfaces for the Vservers being created
+svm_port: e0c
+svm_netmask: 255.255.255.0
+svm_gateway: 192.168.7.1  # To configure the default route/gateway for the vservers
+
+
