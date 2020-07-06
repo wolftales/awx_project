@@ -1,0 +1,20 @@
+[all:vars]
+ansible_user=ansible
+ansible_ssh_pass=netapp1234
+ansible_port=22
+
+[nodes]
+ubuntu-client ansible_host=192.168.7.176
+centos-client ansible_host=192.168.7.177
+mint ansible_host=192.168.7.178
+buster ansible_host=192.168.7.179
+
+[control]
+ansible ansible_host=192.168.7.121
+
+[ontap]
+192.168.7.190 shortname=sour97
+192.168.7.195 shortname=dest97
+
+[ontap:vars]
+ansible_user=admin

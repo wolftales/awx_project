@@ -1,9 +1,9 @@
 ---
-    - hosts: all
-      serial: '{{ parallel_sessions }}'
-      tasks:
-        - shell: uptime
-          register: hello
-        - debug:
-            msg = '{{ hello.stdout_lines }}'
-            
+- hosts: all
+  serial: '{{ parallel_sessions }}'
+  tasks:
+    - shell: uptime
+      register: hello
+    - debug:
+        msg = '{{ hello.stdout_lines }}'
+        

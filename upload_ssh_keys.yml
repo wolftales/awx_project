@@ -1,0 +1,12 @@
+---
+- hosts:
+  remote_user: ken
+  tasks:
+
+    
+    - name: Upload ssh key
+      authorized_key:
+        user: ansible
+        state: present
+        manage_dir: yes
+        ken: "{{ lookup('file', 'var/ansible_id_rsa.pub') }}"
