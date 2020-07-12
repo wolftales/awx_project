@@ -5,7 +5,7 @@
   gather_facts: no
   name: Vserver Config
   vars:
-      state: present
+    state: present
   vars_files:
   - std_vserver_config_vars.yml
 
