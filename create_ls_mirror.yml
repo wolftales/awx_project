@@ -13,8 +13,8 @@
     destination_aggregate: "dest97_01_aggr1"
     schedule: "5min"
     lsupdate: "N"
-  var_files:
-    - ls_varibles.yml
+  # var_files:
+  #   - ls_varibles.yml
   roles:
     - ls_mirror
 
