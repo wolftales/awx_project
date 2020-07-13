@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+#   collections:
+#     - natapp.ontap
+  gather_facts: false
+  vars:
+    ls_source_volume: "destination_root"
+    size: 20
+    size_unit: mb
+    source_svm: "destination"
+    ls_destination_volume: "destination_root_LS"
+    destination_svm: "destination"
+    destination_aggregate: "dest97_01_aggr1"
+    schedule: "5min"
+    lsupdate: "N"
+  var_files:
+    - ls_varibles.yml
+  roles:
+    - ls_mirror
+
+
