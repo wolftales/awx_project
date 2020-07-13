@@ -15,6 +15,9 @@
     type: DP
     vserver: "{{ item.destination_svm }}"
     is_infinite: False
+  with_items:
+    "{{ ls_mirrors }}"
+    
 - name: ..... create LS Mirror
   na_ontap_snapmirror:
     hostname: "{{ netapp_hostname }}"
@@ -29,6 +32,9 @@
     destination_vserver: "{{ item.destination_svm }}"
     relationship_type: load_sharing
     schedule: "{{ item.schedule }}"
+  with_items:
+    "{{ ls_mirrors }}"
+
 - name: ..... initialize LS mirrors
   na_ontap_command:
     hostname: "{{ netapp_hostname }}"
@@ -37,7 +43,10 @@
     https: true
     validate_certs: false
     command: ['snapmirror', 'initialize', '-source-path', '{{ cluster }}://{{ item.source_svm }}/{{ item.ls_source_volume }}', '-destination-path', '{{ cluster }}://{{ item.destination_svm }}/{{ item.ls_destination_volume }}' ]
+  with_items:
+    "{{ ls_mirrors }}"
   when: item.lsupdate == "Y"
+
 - name: ..... execute LS updates
   na_ontap_command:
     hostname: "{{ netapp_hostname }}"
@@ -46,4 +55,6 @@
     https: true
     validate_certs: false
     command: ['snapmirror', 'update-ls-set', '-source-path', '{{ cluster }}://{{ item.source_svm }}/{{ item.ls_source_volume }}' ]
+  with_items:
+    "{{ ls_mirrors }}"
   when: item.lsupdate == "Y"
