@@ -1,6 +1,6 @@
 ---
 # tasks file for ls_mirror
-- name: ..... create destination LS Volume "{{ item.destination_volume }}"
+- name: ..... create destination LS Volume "{{ item.ls_destination_volume }}"
   na_ontap_volume:
     hostname: "{{ netapp_hostname }}"
     username: "{{ netapp_username }}"
@@ -8,7 +8,7 @@
     https: true
     validate_certs: false
     state: present
-    name: "{{ item.destination_volume }}"
+    name: "{{ item.ls_destination_volume }}"
     aggregate_name: "{{ item.destination_aggregate }}"
     size: "{{ (lookup('template', 'convert2bytes.j2') | int * 1.05) | round(0, 'ceil') | int }}"
     size_unit: b
@@ -23,9 +23,9 @@
     https: true
     validate_certs: false
     state: present
-    source_volume: "{{ item.source_volume }}"
-    source_vserver: "{{ item.source_svm_name }}"
-    destination_volume: "{{ item.destination_volume }}"
+    source_volume: "{{ item.ls_source_volume }}"
+    source_vserver: "{{ item.source_svm }}"
+    destination_volume: "{{ item.ls_destination_volume }}"
     destination_vserver: "{{ item.destination_svm }}"
     relationship_type: load_sharing
     schedule: "{{ item.schedule }}"
@@ -36,7 +36,7 @@
     password: "{{ netapp_password }}"
     https: true
     validate_certs: false
-    command: ['snapmirror', 'initialize', '-source-path', '{{ cluster }}://{{ item.source_svm }}/{{ item.source_volume }}', '-destination-path', '{{ cluster }}://{{ item.destination_svm }}/{{ item.destination_volume }}' ]
+    command: ['snapmirror', 'initialize', '-source-path', '{{ cluster }}://{{ item.source_svm }}/{{ item.ls_source_volume }}', '-destination-path', '{{ cluster }}://{{ item.destination_svm }}/{{ item.ls_destination_volume }}' ]
   when: item.lsupdate == "Y"
 - name: ..... execute LS updates
   na_ontap_command:
@@ -45,5 +45,5 @@
     password: "{{ netapp_password }}"
     https: true
     validate_certs: false
-    command: ['snapmirror', 'update-ls-set', '-source-path', '{{ cluster }}://{{ item.source_svm }}/{{ item.source_volume }}' ]
+    command: ['snapmirror', 'update-ls-set', '-source-path', '{{ cluster }}://{{ item.source_svm }}/{{ item.ls_source_volume }}' ]
   when: item.lsupdate == "Y"
