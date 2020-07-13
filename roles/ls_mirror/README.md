@@ -14,12 +14,12 @@ Role Variables
 ---
 # defaults file for ls_mirror
 ls_mirrors:
-    - { ls_source_volume: "svm_root",  # 
+    - { ls_source_volume: "{{ svm }}_root", 
         size: 1, 
         size_unit: gb, 
-        source_svm: "svmData", 
-        ls_destination_volume: "svmData_root_LS", 
-        destination_svm: "svmData", 
+        source_svm: "{{ svm }}", 
+        ls_destination_volume: "{{ svm }}_root_LS", 
+        destination_svm: "{{ svm }}", 
         destination_aggregate: "aggr_data1", 
         schedule: "5min", 
         lsupdate: "N" }
@@ -46,4 +46,5 @@ BSD
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Originally developed by John Champion. 
+Adapted by Ken Hillier.
