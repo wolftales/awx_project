@@ -1,35 +1,35 @@
 ---
 - hosts: localhost
-    collections:
-    - netapp.ontap
-    gather_facts: no
-    name: Peering Configuration - Cluster and SVM
-    vars:
-    input: &login
-        hostname: "{{ netapp_hostname }}"
-        username: "{{ netapp_username }}"
-        password: "{{ netapp_password }}"
-        https: true
-        validate_certs: false
-    vars_files:
-    - std_cluster_config_vars.yml
-    - snapmirror_vars.yml
-    vars_prompt:
-    - name: "netapp_password"
-        prompt: "Enter NetApp Admin Password"
-        private: yes
-    tasks:
+  collections:
+  - netapp.ontap
+  gather_facts: no
+  name: Peering Configuration - Cluster and SVM
+  vars:
+  input: &login
+    hostname: "{{ netapp_hostname }}"
+    username: "{{ netapp_username }}"
+    password: "{{ netapp_password }}"
+    https: true
+    validate_certs: false
+  vars_files:
+  - std_cluster_config_vars.yml
+  - snapmirror_vars.yml
+  vars_prompt:
+  - name: "netapp_password"
+  - prompt: "Enter NetApp Admin Password"
+  - private: yes
+  tasks:
 
 # ROLE: na_ontap_config_cluster
 
-    - name: Create cluster peer
-      na_ontap_cluster_peer:
-        state: "{{ state }}"
-        source_intercluster_lifs: "{{ source_intercluster_lif }}"
-        dest_intercluster_lifs: "{{ dest_intercluster_lif }}"
-        passphrase: "{{ passphrase }}"
-        dest_hostname: "{{ dest_netapp_hostname }}"
-        <<: *login
+  - name: Create cluster peer
+    na_ontap_cluster_peer:
+      state: "{{ state }}"
+      source_intercluster_lifs: "{{ source_intercluster_lif }}"
+      dest_intercluster_lifs: "{{ dest_intercluster_lif }}"
+      passphrase: "{{ passphrase }}"
+      dest_hostname: "{{ dest_netapp_hostname }}"
+      <<: *login
 
 # Peer SVM
 

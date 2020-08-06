@@ -1,39 +1,39 @@
 ---
 - hosts: localhost
-    collections:
-    - netapp.ontap
-    gather_facts: no
-    name: SnapMirror Configuration
-    vars:
+  collections:
+  - netapp.ontap
+  gather_facts: no
+  name: SnapMirror Configuration
+  vars:
     input: &login
-        hostname: "{{ netapp_hostname }}"
-        username: "{{ netapp_username }}"
-        password: "{{ netapp_password }}"
-        https: true
-        validate_certs: false
-    vars_files:
-    - std_cluster_config_vars.yml
-    - snapmirror_vars.yml
-    vars_prompt:
-    - name: "netapp_password"
-        prompt: "Enter NetApp Admin Password"
-        private: yes
-    tasks:
+      hostname: "{{ netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+  vars_files:
+  - std_cluster_config_vars.yml
+  - snapmirror_vars.yml
+  vars_prompt:
+  - name: "netapp_password"
+  - prompt: "Enter NetApp Admin Password"
+  - private: yes
+  tasks:
 
 # SnapMirror Configuration
 
-    - name: Create Destination Volume
+  - name: Create Destination Volume
     na_ontap_volume:
-        state: "{{ state }}"
-        name: "{{ svm_vol_name }}"
-        aggregate_name: "{{ peer_dest_aggregate }}"
-        size: "{{ dest_vol_size }}"
-        size_unit: "{{ dest_vol_size_units }}"
-        type: "{{ vol_sm_type }}"
-        space_guarantee: "none"
-        vserver: "{{ peer_vserver }}"
-        hostname: "{{ dest_netapp_hostname }}"
-        <<: *login
+      state: "{{ state }}"
+      name: "{{ svm_vol_name }}"
+      aggregate_name: "{{ peer_dest_aggregate }}"
+      size: "{{ dest_vol_size }}"
+      size_unit: "{{ dest_vol_size_units }}"
+      type: "{{ vol_sm_type }}"
+      space_guarantee: "none"
+      vserver: "{{ peer_vserver }}"
+      hostname: "{{ dest_netapp_hostname }}"
+      <<: *login
 
 # Create a custom Schedule
 
