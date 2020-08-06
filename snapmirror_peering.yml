@@ -13,6 +13,7 @@
         validate_certs: false
     vars_files:
     - std_cluster_config_vars.yml
+    - snapmirror_vars.yml
     vars_prompt:
     - name: "netapp_password"
         prompt: "Enter NetApp Admin Password"
