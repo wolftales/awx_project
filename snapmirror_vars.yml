@@ -1,0 +1,16 @@
+passphrase: seespotrun
+
+peer_vserver: destination
+peer_cluster: dest97
+peer_dest_aggregate: "{{ peer_cluster }}{{ nodename }}_01_aggr1"
+
+source_intercluster_lif: "{{ inters_lif1 }}"
+dest_intercluster_lif: 192.168.7.197
+dest_netapp_hostname: 192.168.7.195
+
+vol_sm_type: dp
+vol_type: dp
+
+#dest_vol_name: svm_sm_test
+dest_vol_size: 1
+dest_vol_size_units: gb
