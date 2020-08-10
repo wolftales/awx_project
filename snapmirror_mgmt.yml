@@ -12,12 +12,8 @@
       https: true
       validate_certs: false
   vars_files:
-    - std_cluster_config_vars.yml
     - snapmirror_vars.yml
-  # vars_prompt:
-  #  name: "netapp_password"
-  #  prompt: "Enter NetApp Admin Password"
-  #  private: yes
+
   tasks:
 
 # SnapMirror Configuration
@@ -25,16 +21,16 @@
   - name: Create Destination Volume
     na_ontap_volume:
       state: "{{ state }}"
-      name: "{{ svm_vol_name }}"
-      # nodename: "{{ dest_cluster }}-01"
-      aggregate_name: "{{ peer_dest_aggregate }}"
+      name: "{{ dest_volname }}"
+      aggregate_name: "{{ dest_aggr }}"
       size: "{{ dest_vol_size }}"
       size_unit: "{{ dest_vol_size_units }}"
       type: "{{ vol_sm_type }}"
       space_guarantee: "none"
       vserver: "{{ peer_vserver }}"
-      # hostname: "{{ dest_netapp_hostname }}"
+      wait_for_completion: True
       <<: *login
+    when: state == 'present'
 
 # Create a custom Schedule
 
@@ -44,22 +40,22 @@
       name: "1min"
       job_minutes: -1
       use_rest: Never
-      # hostname: "{{ dest_netapp_hostname }}"
       <<: *login
+    when: state == 'present'
 
 # SnapMirror Configuration on Destination
 
-  - name: Create SnapMirror on Destination
+  - name: "{{ 'Create' if state == 'Present' else 'Destroy' }} SnapMirror relationship on Destination"
     na_ontap_snapmirror:
       state: "{{ state }}"
-      source_volume: "{{ svm_vol_name }}"
-      destination_volume: "{{ svm_vol_name }}"
       source_vserver: "{{ svm }}"
+      source_volume: "{{ volname }}"
+      source_hostname: "{{ source_netapp_hostname }}"
+      destination_volume: "{{ dest_volname }}"
       destination_vserver: "{{ peer_vserver }}"
       schedule: "1min"
       initialize: True
       policy: "{{ sm_policy }}"
-      # hostname: "{{ dest_netapp_hostname }}"
       <<: *login
 
 # Wait for SnapMirror to initialize
@@ -67,14 +63,15 @@
   - name: sleep for 20 seconds and continue with play
     wait_for: timeout=20
     delegate_to: localhost
+    when: state == 'present'
 
 # Mount volume(s) on SVM namespace
 
   - name: Mount volume
     na_ontap_volume:
       state: "{{ state }}"
-      name: "{{ svm_vol_name }}"
-      junction_path: "/{{ svm_vol_name }}"
+      name: "{{ dest_volname }}"
+      junction_path: "/{{ dest_volname }}"
       vserver: "{{ peer_vserver }}"
-      hostname: "{{ dest_netapp_hostname }}"
       <<: *login
+    when: state == 'present'

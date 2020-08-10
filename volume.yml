@@ -9,7 +9,7 @@
     size: 10
     aggr: aggr1
     e_policy: 
-    qos_policy:
+    aqos_policy:
     export_policy:
     state: present
   tasks:
@@ -30,4 +30,4 @@
       https: true
       validate_certs: false
       efficiency_policy: "{{ e_policy }}"
-      qos_policy_group: "{{ qos_policy }}"
+      qos_adaptive_policy_group: "{{ aqos_policy }}"
