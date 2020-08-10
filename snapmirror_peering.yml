@@ -1,26 +1,26 @@
 ---
 - hosts: localhost
   collections:
-  - netapp.ontap
+    - netapp.ontap
   gather_facts: no
   name: Peering Configuration - Cluster and SVM
   vars:
-  input: &login
-    hostname: "{{ netapp_hostname }}"
-    username: "{{ netapp_username }}"
-    password: "{{ netapp_password }}"
-    https: true
-    validate_certs: false
+    input: &login
+      hostname: "{{ netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
   vars_files:
-  - std_cluster_config_vars.yml
-  - snapmirror_vars.yml
+    - std_cluster_config_vars.yml
+    - snapmirror_vars.yml
   vars_prompt:
-  - name: "netapp_password"
-  - prompt: "Enter NetApp Admin Password"
-  - private: yes
+    name: "netapp_password"
+    prompt: "Enter NetApp Admin Password"
+    private: yes
   tasks:
 
-# ROLE: na_ontap_config_cluster
+# Peer Cluster
 
   - name: Create cluster peer
     na_ontap_cluster_peer:
@@ -33,12 +33,12 @@
 
 # Peer SVM
 
-    - name: Source vserver peer create
-      na_ontap_vserver_peer:
-        state: "{{ state }}"
-        peer_vserver: "{{ peer_vserver }}"
-        peer_cluster: "{{ peer_cluster }}"
-        vserver: "{{ svm }}"
-        applications: snapmirror
-        dest_hostname: "{{ dest_netapp_hostname }}"
-        <<: *login
+  - name: Source vserver peer create
+    na_ontap_vserver_peer:
+      state: "{{ state }}"
+      peer_vserver: "{{ peer_vserver }}"
+      peer_cluster: "{{ peer_cluster }}"
+      vserver: "{{ svm }}"
+      applications: snapmirror
+      dest_hostname: "{{ dest_netapp_hostname }}"
+      <<: *login
