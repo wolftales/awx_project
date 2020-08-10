@@ -3,37 +3,31 @@
   collections:
     - netapp.ontap
   gather_facts: no
-  name: Peering Configuration - Cluster and SVM
-  vars:
-    input: &login
-      hostname: "{{ netapp_hostname }}"
-      username: "{{ netapp_username }}"
-      password: "{{ netapp_password }}"
-      https: true
-      validate_certs: false
+  name: Peering Configuration for Cluster and SVM
   vars_files:
-    - std_cluster_config_vars.yml
     - snapmirror_vars.yml
-  vars_prompt:
-    name: "netapp_password"
-    prompt: "Enter NetApp Admin Password"
-    private: yes
+
   tasks:
 
 # Peer Cluster
 
-  - name: Create cluster peer
+  - name: Create cluster peer "{{ sour_cluster }} <> {{ dest_cluster }}"
     na_ontap_cluster_peer:
       state: "{{ state }}"
       source_intercluster_lifs: "{{ source_intercluster_lif }}"
       dest_intercluster_lifs: "{{ dest_intercluster_lif }}"
       passphrase: "{{ passphrase }}"
       dest_hostname: "{{ dest_netapp_hostname }}"
-      <<: *login
+      hostname: "{{ sour_netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+    when: state == 'present'
 
 # Peer SVM
 
-  - name: Source vserver peer create
+  - name: Source vserver peer "{{ 'create' if state == 'present' else 'destroy' }}"
     na_ontap_vserver_peer:
       state: "{{ state }}"
       peer_vserver: "{{ peer_vserver }}"
@@ -41,4 +35,24 @@
       vserver: "{{ svm }}"
       applications: snapmirror
       dest_hostname: "{{ dest_netapp_hostname }}"
-      <<: *login
+      hostname: "{{ sour_netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+
+# Peer Cluster
+
+  - name: Destroy cluster peer "{{ sour_cluster }} <> {{ dest_cluster }}"
+    na_ontap_cluster_peer:
+      state: "{{ state }}"
+      source_cluster_name: "{{ sour_cluster }}"
+      dest_cluster_name: "{{ dest_cluster }}"
+      passphrase: "{{ passphrase }}"
+      dest_hostname: "{{ dest_netapp_hostname }}"
+      hostname: "{{ sour_netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+    when: state == 'absent'

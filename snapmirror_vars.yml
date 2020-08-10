@@ -1,26 +1,30 @@
+# netapp_hostname: "{{ dest_netapp_hostname }}"
+netapp_username: admin
+netapp_password: netapp1234
+
+# Cluster and SVM Peering paramters
 passphrase: seespotrun
 
-dest_cluster: "{{ dest97 }}"
-dest97: "{{ 192.168.7.195 }}"
-nodename: 01
+# destination cluster
+dest_cluster: dest97
+dest_netapp_hostname: 192.168.7.195
+dest_intercluster_lif: 192.168.7.197
 peer_vserver: destination
 peer_cluster: "{{ dest_cluster }}"
 peer_dest_aggregate: "dest97_01_aggr1"
 
-dest_netapp_hostname: 192.168.7.195
-dest_intercluster_lif: 192.168.7.197
-sour_netapp_hostname: 192.168.7.195
+
+# source cluster
+sour_cluster: sour97
+sour_netapp_hostname: 192.168.7.190
 source_intercluster_lif: "{{ inters_lif1 }}"
 inters_lif1: 192.168.7.192
 
 
-#dest_vol_name: svm_sm_test
+# Snapmirror volume test parameters
+
 dest_vol_size: 1
 dest_vol_size_units: gb
-
-netapp_hostname: "{{ dest_netapp_hostname }}"
-netapp_username: admin
-netapp_password: netapp1234
 
 svm: source 
 svm_vol_name: snap01
