@@ -25,8 +25,8 @@ aiqum_endpoint_url:     https://192.168.7.225/api  # NetApp AIQUM API endpoint
 
 # NAS Section
 nas_protocol:           "nfs"                  # CIFS, NFS, and Multi-protocol
-#vol_security_style:     "unix"                 # Volume security-style
-vol_security_style:     "{{ 'ntfs' if nas_protocol == 'cifs' else 'unix' }}"                 # Volume security-style
+vol_security_style:     "unix"                 # Volume security-style
+#vol_security_style:     "{{ 'ntfs' if nas_protocol == 'cifs' else 'unix' }}"                 # Volume security-style
 
 # SnapMirror Section
 data_protection:        true                   # DR replica: True/False
