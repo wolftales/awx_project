@@ -26,6 +26,6 @@ dest_aggr: "dest97_01_aggr1"
 dest_vol_size: 1
 dest_vol_size_units: gb
 
-vol_sm_type: DP
+vol_sm_type: dp
 vol_type: dp
 sm_policy: XDPDefault
