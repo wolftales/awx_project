@@ -56,3 +56,18 @@
       https: true
       validate_certs: false
     when: state == 'absent'
+
+# Create a custom Schedule
+
+  - name: Create Custom Job Schedule for SnapMirror
+    na_ontap_job_schedule:
+      state: "{{ state }}"
+      name: "1min"
+      job_minutes: -1
+      use_rest: Never
+      hostname: "{{ dest_netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+    when: state == 'present'
