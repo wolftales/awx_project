@@ -34,7 +34,7 @@
 
 # SnapMirror Configuration on Destination
 
-  - name: "{{ 'Create' if state == 'Present' else 'Destroy' }} SnapMirror relationship on Destination"
+  - name: "{{ 'Create' if state == 'present' else 'Destroy' }} SnapMirror relationship on Destination"
     na_ontap_snapmirror:
       state: "{{ state }}"
       source_vserver: "{{ svm }}"
