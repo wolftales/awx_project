@@ -25,13 +25,14 @@ aiqum_endpoint_url:     https://192.168.7.225/api  # NetApp AIQUM API endpoint
 
 # NAS Section
 nas_protocol:           "nfs"                  # CIFS, NFS, and Multi-protocol
-vol_security_style:     "unix"                 # Volume security-style
+#vol_security_style:     "unix"                 # Volume security-style
+vol_security_style:     "{{ 'ntfs' if nas_protocol == 'cifs' else 'unix' }}"                 # Volume security-style
 
 # SnapMirror Section
 data_protection:        true                   # DR replica: True/False
-peer_aggregate:         dest97_01_aggr1        # DR replica - aggregate (becuase aiqum don't support DP volumes)
-cluster_ip:             "192.168.7.190"        # ONTAP cluster-mgmt
-peer_cluster_ip:        "192.168.7.195"        # ONTAP cluster-mgmt
+peer_aggregate:         "{{ dest_aggr }}"        # DR replica - aggregate (becuase aiqum don't support DP volumes)
+cluster_ip:             "{{ netapp_username }}"        # ONTAP cluster-mgmt
+peer_cluster_ip:        "{{ dest_netapp_username }}"        # ONTAP cluster-mgmt
 policy_name:            "{{ vol_name }}"       # Setting policy_name to vol_name
 policy_rules:                                  # export-policy rule entries
    -  client_match:           192.168.7.122
