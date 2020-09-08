@@ -7,8 +7,8 @@
   vars:
       state: present
   vars_files:
-  - standard_platform_vars.yml
-  - specific_config_vars.yml
+  - vars/standard_platform_vars.yml
+  - vars/specific_config_vars.yml
 
   tasks:
 
@@ -21,16 +21,15 @@
   - na_ontap_vserver_create
 
   tasks:
-    
+
   ###
   # Standard Cluster configuration section
   ###
 
   # Nothing here - Managed seperately
-    
+
   ###
   # Standard SVM configuration section
   ###
-  
+
   # Nothing here - Managed seperately
-  

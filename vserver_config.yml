@@ -7,7 +7,7 @@
   vars:
     state: present
   vars_files:
-  - std_vserver_config_vars.yml
+  - vars/std_vserver_config_vars.yml
 
   roles:
   - na_ontap_vserver_create

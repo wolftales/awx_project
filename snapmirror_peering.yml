@@ -5,7 +5,7 @@
   gather_facts: no
   name: Peering Configuration for Cluster and SVM
   vars_files:
-    - snapmirror_vars.yml
+    - vars/snapmirror_vars.yml
 
   tasks:
 

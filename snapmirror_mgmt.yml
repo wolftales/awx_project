@@ -12,7 +12,7 @@
       https: true
       validate_certs: false
   vars_files:
-    - snapmirror_vars.yml
+    - vars/snapmirror_vars.yml
 
   tasks:
 

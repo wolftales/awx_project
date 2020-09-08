@@ -3,7 +3,6 @@
   remote_user: ken
   tasks:
 
-    
     - name: Upload ssh key
       authorized_key:
         user: ansible
