@@ -28,4 +28,5 @@ dest_vol_size_units: gb
 
 vol_sm_type: dp
 vol_type: dp
-sm_policy: XDPDefault
+sm_policy: MirrorAllSnapshots
+sm_type: extended_data_protection

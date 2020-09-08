@@ -45,6 +45,7 @@
       schedule: "1min"
       initialize: True
       policy: "{{ sm_policy }}"
+      relationship_type:    "{{ sm_type }}"
       <<: *login
 
 # # Wait for SnapMirror to initialize
