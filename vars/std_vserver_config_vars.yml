@@ -3,7 +3,7 @@
 ###
 
 vservers:       # Vservers to create
-  - { name: "{{ svm }}", aggr: "{{ svm_aggregate }}", protocol: nfs }
+  - { name: "{{ svm }}", aggr: "{{ svm_aggregate }}", protocol: 'cifs,nfs' }
 
 vserver_dns:    # DNS at the Vserver level.
   - { vserver: "{{ svm }}", dns_domains: "{{ dns_domain }}", dns_nameservers: "{{ dns_servers }}" }
@@ -13,3 +13,6 @@ lifs:           # interfaces for the Vservers being created
 
 gateway:        # To configure the default route/gateway for the vservers
   - { vserver: "{{ svm }}", destination: 0.0.0.0/0, gateway: "{{ svm_gateway }}" }
+
+cifs:
+  - { vserver: "{{ svm }}", cifs_server_name: "{{ svm }}", domain: "{{ dns_domain }}", force: true }
