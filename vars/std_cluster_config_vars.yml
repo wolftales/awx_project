@@ -30,7 +30,8 @@ snmp:       # Setup or modify an SNMP community
     - { community_name: public, access_control: ro }
 
 aggrs:      # Create one or more Aggregates.
-    - { name: "{{ cluster }}_01_aggr1", node: "{{ cluster }}-01", disk_count: 23, max_raid: 23 }
+    - { name: "{{ cluster }}_01_aggr1", node: "{{ cluster }}-01", disk_type: fcal, disk_count: 23, max_raid: 23 }
+    - { name: "{{ cluster }}_01_aggr2", node: "{{ cluster }}-01", disk_type: ssd, disk_count: 13, max_raid: 23 }
 
 ports:      # Set MTU for ports.
     - { node: "{{ cluster }}-01", port: e0a, mtu: 1500, flowcontrol: none }
