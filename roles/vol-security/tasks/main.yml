@@ -49,15 +49,15 @@
                       '-volume',  "{{ vol_security.vol_name }}",
                       '-autogrow-mode', "{{ auto_size }}" ]
 
-- name: "Set security style to {{ ed_vol_security }}"
-  netapp.ontap.na_ontap_volume:
-    state: present
-    vserver: "{{ vol_security.vserver }}"
-    name: "{{ vol_security.vol_name }}"
-    volume_security_style: "{{ ed_vol_security }}"
-    space_guarantee: none
-    hostname:       "{{ vol_security.cluster_ip }}"
-    username:       "{{ vol_security.credentials.na.user_name }}"
-    password:       "{{ vol_security.credentials.na.user_pw }}"
-    https:          true
-    validate_certs: false
+# - name: "Set security style to {{ ed_vol_security }}"
+#   netapp.ontap.na_ontap_volume:
+#     state: present
+#     vserver: "{{ vol_security.vserver }}"
+#     name: "{{ vol_security.vol_name }}"
+#     volume_security_style: "{{ ed_vol_security }}"
+#     space_guarantee: none
+#     hostname:       "{{ vol_security.cluster_ip }}"
+#     username:       "{{ vol_security.credentials.na.user_name }}"
+#     password:       "{{ vol_security.credentials.na.user_pw }}"
+#     https:          true
+#     validate_certs: false
