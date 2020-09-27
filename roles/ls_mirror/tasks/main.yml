@@ -1,7 +1,7 @@
 ---
 # tasks file for ls_mirror
 - name: ..... create destination LS Volume "{{ item.ls_destination_volume }}"
-  netapp.ontap.na_ontap_volume:
+  na_ontap_volume:
     hostname: "{{ netapp_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -19,7 +19,7 @@
     "{{ ls_mirrors }}"
 
 - name: ..... create LS Mirror
-  netapp.ontap.na_ontap_snapmirror:
+  na_ontap_snapmirror:
     hostname: "{{ netapp_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
