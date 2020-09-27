@@ -10,7 +10,7 @@
     state: present
     name: "{{ item.ls_destination_volume }}"
     aggregate_name: "{{ item.destination_aggregate }}"
-    size: "{{ (lookup('template', 'convert2bytes.j2') | int * 1.25) | round(0, 'ceil') | int }}"
+    size: "{{ (lookup('template', 'convert2bytes.j2') | int * 1.05) | round(0, 'ceil') | int }}"
     size_unit: b
     type: DP
     vserver: "{{ item.destination_svm }}"
