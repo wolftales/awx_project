@@ -36,7 +36,7 @@
     "{{ ls_mirrors }}"
 
 - name: ..... initialize LS mirrors
-  netapp.ontap.na_ontap_command:
+  na_ontap_command:
     hostname: "{{ netapp_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
@@ -48,7 +48,7 @@
   when: item.lsupdate == "Y"
 
 - name: ..... execute LS updates
-  netapp.ontap.na_ontap_command:
+  na_ontap_command:
     hostname: "{{ netapp_hostname }}"
     username: "{{ netapp_username }}"
     password: "{{ netapp_password }}"
