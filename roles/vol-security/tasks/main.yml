@@ -52,7 +52,7 @@
 
 - name: "Set security style to {{ ed_vol_security }}"
   netapp.ontap.na_ontap_volume:
-    # state: present
+    state: present
     vserver: "{{ vol_security.vserver }}"
     name: "{{ vol_security.vol_name }}"
     volume_security_style: "{{ ed_vol_security }}"
