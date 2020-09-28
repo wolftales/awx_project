@@ -45,17 +45,17 @@
     https:          true
     validate_certs: false
 
-    state:                'present'
+    state:                  'present'
     source_volume:          "{{ dp_create.src_vol_name }}"
-    source_vserver:          "{{ dp_create.src_vserver }}"
+    source_vserver:         "{{ dp_create.src_vserver }}"
     destination_volume:     "{{ dp_create.peer_vol_name }}"
-    destination_vserver:     "{{ dp_create.peer_vserver }}"
-    policy:               'MirrorAllSnapshots'
-    schedule:             'hourly'
-    initialize:           True
+    destination_vserver:    "{{ dp_create.peer_vserver }}"
+    policy:                 'MirrorAllSnapshots'
+    schedule:               'hourly'
+    initialize:             True
     # relationship_type:    'extended_data_protection'
-    relationship_type:    'data_protection'
-    use_rest:             'Always'
+    relationship_type:      'data_protection'
+    use_rest:               'Always'
   register:         ed_result
 
 - name: 'provision a snapmirror'
