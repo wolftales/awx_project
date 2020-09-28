@@ -38,7 +38,7 @@
     - vol_security.nas_protocol   == 'multi'
 
 - name: 'Set volume properties for {{ ed_vol_security }}, thin-provisioning and autogrow'
-  netapp.ontap.na_ontap_command:
+  na_ontap_command:
     hostname:       "{{ vol_security.cluster_ip }}"
     username:       "{{ vol_security.credentials.na.user_name }}"
     password:       "{{ vol_security.credentials.na.user_pw }}"
