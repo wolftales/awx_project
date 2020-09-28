@@ -32,7 +32,8 @@
 
 - name: 'set determine volume security style multi'
   set_fact:
-    ed_vol_security:  "{{ vol_security.security_style }}"
+    # ed_vol_security:  "{{ vol_security.security_style }}"
+    ed_vol_security:  'unix'
   when:
     - vol_security.nas_protocol   == 'multi'
 
