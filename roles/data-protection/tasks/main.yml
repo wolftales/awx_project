@@ -53,7 +53,8 @@
     policy:               'MirrorAllSnapshots'
     schedule:             'hourly'
     initialize:           True
-    relationship_type:    'extended_data_protection'
+    # relationship_type:    'extended_data_protection'
+    relationship_type:    'data_protection'
     use_rest:             'Always'
   register:         ed_result
 
