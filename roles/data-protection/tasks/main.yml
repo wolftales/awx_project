@@ -58,7 +58,7 @@
 #     use_rest:               'Always'
 #   register:         ed_result
 
-- name: 'provision a snapmirror'
+- name: 'provision and initialize a snapmirror'
   netapp.ontap.na_ontap_snapmirror:
     hostname:       "{{ dp_create.peer_cluster_ip }}"
     username:       "{{ dp_create.credentials.na.dst.user_name }}"
