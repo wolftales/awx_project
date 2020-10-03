@@ -47,7 +47,7 @@
       interface_name: "{{ item.name }}"
       vserver: "{{ cluster }}"
       address: "{{ item.address }}"
-      netmask: "{{ subnet }}"
+      netmask: "{{ netmask }}"
       role: "{{ item.role }}"
       home_node: "{{ item.node }}"
       home_port: "{{ item.port }}"
