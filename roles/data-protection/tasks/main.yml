@@ -37,7 +37,28 @@
     vserver:              "{{ dp_create.peer_vserver }}"
     name:                 "{{ dp_create.peer_vol_name }}"
 
-- name: 'provision a snapmirror'
+# - name: 'initialize a snapmirror'
+#   netapp.ontap.na_ontap_snapmirror:
+#     hostname:       "{{ dp_create.peer_cluster_ip }}"
+#     username:       "{{ dp_create.credentials.na.dst.user_name }}"
+#     password:       "{{ dp_create.credentials.na.dst.user_pw }}"
+#     https:          true
+#     validate_certs: false
+#
+#     state:                  'present'
+#     source_volume:          "{{ dp_create.src_vol_name }}"
+#     source_vserver:         "{{ dp_create.src_vserver }}"
+#     destination_volume:     "{{ dp_create.peer_vol_name }}"
+#     destination_vserver:    "{{ dp_create.peer_vserver }}"
+#     policy:                 'MirrorAllSnapshots'
+#     schedule:               'hourly'
+#     initialize:             True
+#     # relationship_type:    'extended_data_protection'
+#     relationship_type:      'data_protection'
+#     use_rest:               'Always'
+#   register:         ed_result
+
+- name: 'provision and initialize a snapmirror'
   netapp.ontap.na_ontap_snapmirror:
     hostname:       "{{ dp_create.peer_cluster_ip }}"
     username:       "{{ dp_create.credentials.na.dst.user_name }}"

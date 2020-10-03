@@ -6,7 +6,7 @@
       - aiqum_prov.vserver_name         is defined
       - aiqum_prov.service_level_name   is defined
       - aiqum_prov.vol_name             is defined
-      - aiqum_prov.capacity           is defined
+      - aiqum_prov.capacity             is defined
 
   ignore_errors:    true
   register:         ed_failed
