@@ -2,7 +2,7 @@
 - hosts: localhost
   gather_facts: false
   vars:
-      state: present
+      state: "{{ state }}"
   tasks:
     
   - name: Manage NFS Settings

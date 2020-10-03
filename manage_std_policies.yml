@@ -2,11 +2,11 @@
 - hosts: localhost
   gather_facts: false
   vars:
-    state: present
+    state: "{{ state }}"
   tasks:
     
   # Manage Export-policies - Create 'data' policy
-  - name: Create Data SVM Export-policy
+  - name: '{{ Create if state == present else Delete }} Data SVM Export-policy'
     na_ontap_export_policy:
       state: "{{ state }}"
       name: "{{ svm_export_policy_name }}"
@@ -16,9 +16,10 @@
       password: "{{ netapp_password }}"
       https: true
       validate_certs: false
+      when: state == 'present'
   
   # Manage Export-policies - Add rules
-  - name: Setup "Default" and SVM Export-policies
+  - name: '{{ Add if state == present else Remove }} Data SVM Export-policy rules'
     na_ontap_export_policy_rule:
       state: "{{ state }}"
       policy_name: "{{ item.name }}"
@@ -34,3 +35,16 @@
       https: true
       validate_certs: false
     with_items: "{{ export_policy_rules_list }}"
+  
+  # Manage Export-policies - Create 'data' policy
+  - name: '{{ Create if state == present else Delete }} Data SVM Export-policy'
+    na_ontap_export_policy:
+      state: "{{ state }}"
+      name: "{{ svm_export_policy_name }}"
+      vserver: "{{ svm }}"
+      hostname: "{{ hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+    when: state == 'absent'

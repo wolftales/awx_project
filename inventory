@@ -10,7 +10,7 @@ mint ansible_host=192.168.7.178
 buster ansible_host=192.168.7.179
 
 [control]
-ansible ansible_host=192.168.7.121
+ansible ansible_host=192.168.7.123
 
 [ontap]
 192.168.7.190 shortname=sour97

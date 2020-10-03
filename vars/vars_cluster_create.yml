@@ -1,0 +1,16 @@
+netapp_username:    admin
+netapp_password:    netapp1234
+cluster:            testTAP
+cluster_mgmt:       192.168.7.180
+subnet:             255.255.255.0
+gateway:            192.168.7.1
+
+node1:     # Cluster Create Section, additional nodes can join - uncomment & adjust join task
+  dhcp_ip:          192.168.7.170  # DHCP IP to log in
+  node_mgmt_ip:     192.168.7.181  # permenant node-mgmt IP
+  cluster_intra:    169.254.23.240  # Only necessary for joins
+
+
+mgmt_lifs:  # Configured node & cluster mgmt LIFs
+  - { hostname: "{{ node1.dhcp_ip }}", node: "{{ cluster }}-01", name: "{{ cluster }}_mgmt", address: "{{ cluster_mgmt }}", role: cluster-mgmt, port: e0c }
+  - { hostname: "{{ cluster_mgmt }}", node: "{{ cluster }}-01", name: "{{ cluster }}-01_mgmt", address: "{{ node1.node_mgmt_ip }}", role: node-mgmt, port: e0c }
