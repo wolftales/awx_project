@@ -1,0 +1,19 @@
+netapp_username: admin
+netapp_password: netapp1234
+cluster: ontap-cl01
+cluster_mgmt: 192.168.7.210
+subnet: 255.255.255.0
+gateway: 192.168.7.1
+node1:
+  dhcp_ip: 192.168.7.224
+  node_mgmt_ip: 192.168.7.211
+  cluster_intra: 169.254.23.240
+node2:
+  dhcp_ip: 192.168.7.218
+  node_mgmt_ip: 192.168.7.216
+  cluster_intra: 169.254.58.243
+
+mgmt_lifs:
+  - { hostname: "{{ node1.dhcp_ip }}", node: "{{ cluster }}-01", name: "{{ cluster }}_mgmt", address: "{{ cluster_mgmt }}", role: cluster-mgmt, port: e0c }
+  - { hostname: "{{ cluster_mgmt }}", node: "{{ cluster }}-01", name: "{{ cluster }}-01_mgmt", address: "{{ node1.node_mgmt_ip }}", role: node-mgmt, port: e0c }
+  - { hostname: "{{ cluster_mgmt }}", node: "{{ cluster }}-02", name: "{{ cluster }}-02_mgmt", address: "{{ node2.node_mgmt_ip }}", role: node-mgmt, port: e0c }
