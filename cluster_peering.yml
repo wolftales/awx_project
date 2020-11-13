@@ -1,0 +1,43 @@
+---
+- hosts: localhost
+  collections:
+    - netapp.ontap
+  gather_facts: no
+  name: Peering Configuration for Cluster (admin) SVM
+  vars_files:
+    - vars/snapmirror_vars.yml
+
+  tasks:
+
+# Peer Cluster
+
+  - name: Create cluster peer "{{ source_cluster }} < = > {{ dest_cluster }}"
+    na_ontap_cluster_peer:
+      state: "{{ state }}"
+      source_intercluster_lifs: "{{ source_intercluster_lif }}"
+      dest_intercluster_lifs: "{{ dest_intercluster_lif }}"
+      passphrase: "{{ passphrase }}"
+      dest_hostname: "{{ dest_netapp_hostname }}"
+      encryption_protocol_proposed: tls_psk
+      hostname: "{{ source_netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+    when: state == 'present'
+
+# Peer Cluster
+
+  - name: Destroy cluster peer "{{ source_cluster }} < = > {{ dest_cluster }}"
+    na_ontap_cluster_peer:
+      state: "{{ state }}"
+      source_cluster_name: "{{ source_cluster }}"
+      dest_cluster_name: "{{ dest_cluster }}"
+      passphrase: "{{ passphrase }}"
+      dest_hostname: "{{ dest_netapp_hostname }}"
+      hostname: "{{ source_netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+    when: state == 'absent'
