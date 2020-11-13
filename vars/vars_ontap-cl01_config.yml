@@ -1,15 +1,15 @@
 # Varibles for ms11p00im-filercdot001 setup & config
 cluster: ontap-cl01
 cluster_aggr: "{{ cluster | replace('-','_') }}"  # Replaces - with _
-# language:  "{{ lang if lang is defined else omit }}"
 cluster_mgmt: 192.168.7.210
 netapp_hostname: "{{ cluster_mgmt }}"
 netapp_username: admin
 netapp_password: netapp1234    # Comment out to use vars_prompt
+# language:  "{{ lang if lang is defined else omit }}"
 
 # ONTAP Cluster create varibles
 subnet: 255.255.255.0
-# gateway: 192.168.7.1
+
 node1:
   dhcp_ip: 192.168.7.224
   node_mgmt_ip: 192.168.7.211
@@ -34,7 +34,10 @@ dns_domain: example.local
 dns_srvrs: 192.168.7.3
 
 # NTP & Timezone Settings
-time: time.apple.com
+# time: time.apple.com
+# time: time.google.com
+# time: time.nist.gov
+time: time.example.local
 tzone: 'GMT'
 # tzone: 'ETC/GMT'           #  <Area/Location Timezone> - Specified in the Olson format
 # tzone: 'US/Pacific'           #  <Area/Location Timezone> - Specified in the Olson format
@@ -62,7 +65,6 @@ svm_subnet_ip_ranges: "{{ ['192.168.7.212', '192.168.7.217'] }}"
 # Each variable will take one or more dictonary entries.  Simply omit sections
 # that you don't want to run.  Anotherwords: Empty varibles don't run in NetApp roles
 
-# license_codes: YFIZOMAFXMSMUCKQBPBAAAAAAAAA,ENVNLMAFXMSMUCKQBPBAAAAAAAAA,KYALNGPCCLPKICKQBPBAAAAAAAAA,QFOZJGPCCLPKICKQBPBAAAAAAAAA
 license_codes: QDDSVRRRYVHXCFABGAAAAAAAAAAA,MBXNQRRRYVHXCFABGAAAAAAAAAAA,ANGJKUNFXMSMUCEZFAAAAAAAAAAA,UFTUNUNFXMSMUCEZFAAAAAAAAAAA
 
 disks: # disks module assigns all visiable disks to a node.
