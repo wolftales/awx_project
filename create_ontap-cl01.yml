@@ -33,13 +33,13 @@
       hostname: "{{ node1.dhcp_ip }}"
       <<: *login
 
-  # - name: "Join a Node to {{ cluster }}"
-  #   na_ontap_cluster:
-  #     state: present
-  #     cluster_ip_address:  "{{ node2.cluster_intra }}"
-  #     # node_name: ontap02
-  #     hostname: "{{ node1.dhcp_ip }}"
-  #     <<: *login
+  - name: "Join a Node to {{ cluster }}"
+    na_ontap_cluster:
+      state: present
+      cluster_ip_address:  "{{ node2.cluster_intra }}"
+      # node_name: ontap02
+      hostname: "{{ node1.dhcp_ip }}"
+      <<: *login
 
   - name: 'Create Management lifs: "{{ cluster }}"'
     na_ontap_interface:
@@ -47,7 +47,7 @@
       interface_name: "{{ item.name }}"
       vserver: "{{ cluster }}"
       address: "{{ item.address }}"
-      netmask: "{{ subnet }}"
+      netmask: "{{ item.netmask }}"
       role: "{{ item.role }}"
       home_node: "{{ item.node }}"
       home_port: "{{ item.port }}"
