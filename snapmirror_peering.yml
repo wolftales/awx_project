@@ -18,6 +18,7 @@
       dest_intercluster_lifs: "{{ dest_intercluster_lif }}"
       passphrase: "{{ passphrase }}"
       dest_hostname: "{{ dest_netapp_hostname }}"
+      encryption_protocol_proposed: tls_psk
       hostname: "{{ source_netapp_hostname }}"
       username: "{{ netapp_username }}"
       password: "{{ netapp_password }}"
