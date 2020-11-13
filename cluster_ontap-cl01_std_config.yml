@@ -9,7 +9,7 @@
       username: "{{ netapp_username }}"
       password: "{{ netapp_password }}"
       https: true
-      validate_certs: "{{ validate_certs }}"
+      validate_certs: false
   # vars_prompt:  # For NetApp Admin Credentials
   #   - name: netapp_username
   #     prompt: NetApp 'admin'
