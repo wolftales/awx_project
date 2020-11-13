@@ -123,11 +123,11 @@
       node_name: "{{ item.node }}"
       transport: smtp
       hostname_in_subject: true
-      from_address: "{{ cluster }}@apple.com"
-      noteto: abc@def.com,def@ghi.com
+      from_address: "{{ cluster }}@example.com"
+      noteto: abc@example.com,def@example.com
       to_addresses: isgms@group.apple.com
-      partner_addresses: appleasup4gw@group.apple.co
-      mail_hosts: bz.apple.com
+      partner_addresses: exampleasup4partner@example.com
+      mail_hosts: bz.example.com
     loop: "{{ aggrs }}"
 
 
@@ -262,7 +262,7 @@
       method: PATCH
       url: "{{ ontap_endpoint_url }}/security/accounts/{{ owner_uuid }}/{{ account_name }}"
       return_content: yes
-      body: "{{ lookup('file', 'login_applications.json') }}"
+      body: "{{ lookup('file', 'vars/login_applications.json') }}"
       body_format: json
       headers:
         Accept: application/json

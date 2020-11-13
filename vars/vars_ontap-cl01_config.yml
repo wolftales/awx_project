@@ -111,6 +111,9 @@ inters: # Create intercluster lifs for SnapMirror.
 
 ###
 # Vserver Config
+# modify role: na_ontap_vserver_create
+# root_volume: "{{ item.name | replace('-','_') }}_root"
+###
 
 vservers:  # Vservers to create # aggr_list is optional.  If not specified, defaults to all aggregates.
   - { name: "{{ svm }}", aggr: "{{ cluster_aggr }}_01_aggr1", protocol: nfs, rootvol: "{{ svm_root }}", aggr_list: "{{ cluster_aggr }}_01_aggr1,{{ cluster_aggr }}_02_aggr1" }

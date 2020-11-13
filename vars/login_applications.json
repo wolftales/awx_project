@@ -1,0 +1,49 @@
+{
+  "applications": [
+    {
+      "application": "console",
+      "authentication_methods": [
+        "password"
+      ],
+      "second_authentication_method": "none"
+    },
+    {
+      "application": "http",
+      "authentication_methods": [
+        "password"
+      ],
+      "second_authentication_method": "none"
+    },
+    {
+      "application": "ontapi",
+      "authentication_methods": [
+        "password"
+      ],
+      "second_authentication_method": "none"
+    },
+    {
+      "application": "service-processor",
+      "authentication_methods": [
+        "password"
+      ],
+      "second_authentication_method": "none"
+    },
+    {
+      "application": "ssh",
+      "authentication_methods": [
+        "password"
+      ],
+      "second_authentication_method": "none"
+    },
+    {
+      "application": "ssh",
+      "authentication_methods": [
+        "publickey"
+      ],
+      "second_authentication_method": "none"
+    }
+  ],
+  "role": {
+    "name": "admin"
+  }
+}
