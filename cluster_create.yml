@@ -4,9 +4,9 @@
   gather_facts: false
   collections:
     - netapp.ontap
-  vars_files: "{{ file }}"
+  vars_files:
+  - vars/vars_ontap-cl01_config.yml
   vars:
-    file: vars/vars_cluster_create.yml
     login: &login
       username: "{{ netapp_username }}"
       password: "{{ netapp_password }}"
@@ -32,7 +32,7 @@
       cluster_name: "{{ cluster }}"
       hostname: "{{ node1.dhcp_ip }}"
       <<: *login
-  
+
   # - name: "Join a Node to {{ cluster }}"
   #   na_ontap_cluster:
   #     state: present

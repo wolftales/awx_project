@@ -17,7 +17,7 @@
   #     prompt: NetApp 'admin' password
   #     secret: true
   vars_files:
-  - vars/vars_ontap-cl01_cluster_config.yml
+  - vars/vars_ontap-cl01_config.yml
   collections:
   - netapp.ontap
 
