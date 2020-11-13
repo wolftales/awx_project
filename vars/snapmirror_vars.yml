@@ -7,7 +7,7 @@ dest_cluster: dest97
 dest_svm: destination
 dest_netapp_hostname: 192.168.7.195
 dest_intercluster_lif: 192.168.7.197
-peer_vserver: destination
+peer_vserver: "{{ dest_svm }}"
 peer_cluster: "{{ dest_cluster }}"
 
 

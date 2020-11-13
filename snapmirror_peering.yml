@@ -31,7 +31,7 @@
     na_ontap_vserver_peer:
       state: "{{ state }}"
       peer_vserver: "{{ dest_svm }}"
-      peer_cluster: "{{ peer_cluster }}"
+      peer_cluster: "{{ dest_cluster }}"
       vserver: "{{ source_svm }}"
       applications: snapmirror
       dest_hostname: "{{ dest_netapp_hostname }}"
