@@ -30,9 +30,9 @@
   - name: Source vserver peer "{{ 'create' if state == 'present' else 'destroy' }}"
     na_ontap_vserver_peer:
       state: "{{ state }}"
-      peer_vserver: "{{ peer_vserver }}"
+      peer_vserver: "{{ dest_svm }}"
       peer_cluster: "{{ peer_cluster }}"
-      vserver: "{{ svm }}"
+      vserver: "{{ source_svm }}"
       applications: snapmirror
       dest_hostname: "{{ dest_netapp_hostname }}"
       hostname: "{{ source_netapp_hostname }}"
@@ -46,7 +46,7 @@
   - name: Destroy cluster peer "{{ source_cluster }} < = > {{ dest_cluster }}"
     na_ontap_cluster_peer:
       state: "{{ state }}"
-      source_cluster_name: "{{ sour_cluster }}"
+      source_cluster_name: "{{ source_cluster }}"
       dest_cluster_name: "{{ dest_cluster }}"
       passphrase: "{{ passphrase }}"
       dest_hostname: "{{ dest_netapp_hostname }}"
