@@ -20,11 +20,11 @@ source_intercluster_lif: 192.168.7.192
 
 
 # Snapmirror volume test parameters
-dest_volname: snap01
+dest_volname: "{{ volname }}"
 dest_aggr: "dest97_01_aggr1"
 dest_vol_size: 1
 dest_vol_size_units: gb
-volname: "{{ dest_volname }}"
+# volname: "{{ dest_cluster }}"
 vol_sm_type: dp
 vol_type: dp
 sm_policy: MirrorAllSnapshots

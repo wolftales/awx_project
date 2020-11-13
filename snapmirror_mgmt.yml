@@ -37,11 +37,11 @@
   - name: "{{ 'Create' if state == 'present' else 'Destroy' }} SnapMirror relationship on Destination"
     na_ontap_snapmirror:
       state: "{{ state }}"
-      source_vserver: "{{ svm }}"
+      source_vserver: "{{ source_svm }}"
       source_volume: "{{ volname }}"
       source_hostname: "{{ source_netapp_hostname }}"
       destination_volume: "{{ dest_volname }}"
-      destination_vserver: "{{ peer_vserver }}"
+      destination_vserver: "{{ dest_svm }}"
       schedule: "1min"
       initialize: True
       policy: "{{ sm_policy }}"
