@@ -156,7 +156,7 @@ gateway:  # To configure the default route/gateway for the vservers
 
 # Broadcast-domain Management of active ports
 bcd_split_ports:
-  - { origin_bd: Default, new_bd: "{{ mgmt_bd }}", ports: '["{{ cluster }}-01:e0c", "{{ cluster }}-02:e0c"]' }
+  - { origin_bd: Default, new_bd: "{{ bd.mgmt }}", ports: '["{{ cluster }}-01:e0c", "{{ cluster }}-02:e0c"]' }
 
 # Service Processor Network Configuration
 #sp_config: # Configure Service Processor network
