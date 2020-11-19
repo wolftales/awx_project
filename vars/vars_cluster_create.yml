@@ -1,13 +1,13 @@
 netapp_username:    admin
 netapp_password:    netapp1234
 cluster:            testTAP
-cluster_mgmt:       "{{ netapp_hostname if netapp_hostname is defined else 192.168.7.180 }}"
+cluster_mgmt:       "{{ netapp_hostname if netapp_hostname is defined else 192.168.7.187 }}"
 netmask:            255.255.255.0
 gateway:            192.168.7.1
 
 node1:     # Cluster Create Section, additional nodes can join - uncomment & adjust join task
   dhcp_ip:          "{{ node1_dhcp_ip if node1_dhcp_ip is defined else 192.168.7.170 }}"  # DHCP IP to log in
-  node_mgmt_ip:     "{{ node1_node_mgmt_ip if node1_node_mgmt_ip is defined else 192.168.7.181 }}"  # permenant node-mgmt IP
+  node_mgmt_ip:     "{{ node1_node_mgmt_ip if node1_node_mgmt_ip is defined else 192.168.7.188 }}"  # permenant node-mgmt IP
   cluster_intra:    169.254.23.240  # Only necessary for joins
 
 
