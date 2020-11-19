@@ -1,7 +1,7 @@
 # Varibles for ms11p00im-filercdot001 setup & config
 cluster: ontap-cl01
 cluster_aggr: "{{ cluster | replace('-','_') }}"  # Replaces - with _
-cluster_mgmt: 192.168.7.210
+cluster_mgmt: 192.168.7.180
 netapp_hostname: "{{ cluster_mgmt }}"
 netapp_username: admin
 netapp_password: netapp1234    # Comment out to use vars_prompt
@@ -12,11 +12,13 @@ subnet: 255.255.255.0
 
 node1:
   dhcp_ip: 192.168.7.224
-  node_mgmt_ip: 192.168.7.211
+  node_mgmt_ip: 192.168.7.181
+  node_icl: 192.168.7.182
   cluster_intra: 169.254.23.240
 node2:
   dhcp_ip: 192.168.7.218
-  node_mgmt_ip: 192.168.7.216
+  node_mgmt_ip: 192.168.7.183
+  node_icl: 192.168.7.184
   cluster_intra: 169.254.58.243
 
 mgmt_lifs:
@@ -24,6 +26,10 @@ mgmt_lifs:
   - { hostname: "{{ cluster_mgmt }}", node: "{{ cluster }}-01", name: "{{ cluster }}-01_mgmt", address: "{{ node1.node_mgmt_ip }}", netmask: "{{ subnet }}", role: node-mgmt, port: e0c }
   - { hostname: "{{ cluster_mgmt }}", node: "{{ cluster }}-02", name: "{{ cluster }}-02_mgmt", address: "{{ node2.node_mgmt_ip }}", netmask: "{{ subnet }}", role: node-mgmt, port: e0c }
 
+# Broadcast Domain varibles
+bd:
+  mgmt: MGMT
+  nas: NFS
 
 # Added to support admin publickey setup via REST API
 ontap_endpoint_url: "https://{{ cluster_mgmt }}/api"
@@ -52,7 +58,7 @@ svm_root: "{{ svm | replace('-','_') }}"
 svm_netmask: 255.255.255.0
 svm_gateway: 192.168.7.1
 svm_network: 192.168.7.0/24
-svm_subnet_ip_ranges: "{{ ['192.168.7.212', '192.168.7.217'] }}"
+svm_subnet_ip_ranges: "{{ ['192.168.7.185', '192.168.7.186'] }}"
 
 
 ###
@@ -98,15 +104,15 @@ ports:  # Set MTU for ports
 bcasts:  # Create Broadcast domains
   # - { name: nfs_domain, mtu: 1500, ipspace: default, ports: 'ms11p00im-filercdot001-01:e3a,ms11p00im-filercdot001-01:e3b,ms11p00im-filercdot001-01:e0e,ms11p00im-filercdot001-01:e0g,ms11p00im-filercdot001-02:e3a,ms11p00im-filercdot001-02:e3b,ms11p00im-filercdot001-02:e0e,ms11p00im-filercdot001-02:e0g' }
   # - { name: mgmtSM_domain, mtu: 1500, ipspace: default, ports: 'ms11p00im-filercdot001-01:e0f,ms11p00im-filercdot001-02:e0f' }
-  - { name: nfs_domain, mtu: 1500, ipspace: default,
+  - { name: "{{ bd.nas }}", mtu: 1500, ipspace: default,
       ports: "{{ cluster }}-01:e0d,{{ cluster }}-01:e0e,{{ cluster }}-02:e0d,{{ cluster }}-02:e0e" }
   # - { name: mgmtSM_domain, mtu: 1500, ipspace: default, ports: '{{ cluster }}-01:e0f,{{ cluster }}-02:e0f' }
-  - { name: mgmtSM_domain, mtu: 1500, ipspace: default,
+  - { name: "{{ bd.mgmt }}", mtu: 1500, ipspace: default,
       ports: '{{ cluster }}-01:e0f,{{ cluster }}-02:e0f,{{ cluster }}-01:e0c,{{ cluster }}-02:e0c' }
 
 inters: # Create intercluster lifs for SnapMirror.
-  - { name: "{{ cluster }}-01_icl1", address: 192.168.7.213, netmask: "{{ svm_netmask }}", node: "{{ cluster }}-01", port: e0f }
-  - { name: "{{ cluster }}-01_icl2", address: 192.168.7.218, netmask: "{{ svm_netmask }}", node: "{{ cluster }}-02", port: e0f }
+  - { name: "{{ cluster }}-01_icl1", address: "{{ node1.node_icl }}", netmask: "{{ svm_netmask }}", node: "{{ cluster }}-01", port: e0f }
+  - { name: "{{ cluster }}-01_icl2", address: "{{ node2.node_icl }}", netmask: "{{ svm_netmask }}", node: "{{ cluster }}-02", port: e0f }
 
 
 ###
@@ -150,7 +156,7 @@ gateway:  # To configure the default route/gateway for the vservers
 
 # Broadcast-domain Management of active ports
 bcd_split_ports:
-  - { origin_bd: Default, new_bd: mgmtSM_domain, ports: '["{{ cluster }}-01:e0c", "{{ cluster }}-02:e0c"]' }
+  - { origin_bd: Default, new_bd: "{{ mgmt_bd }}", ports: '["{{ cluster }}-01:e0c", "{{ cluster }}-02:e0c"]' }
 
 # Service Processor Network Configuration
 #sp_config: # Configure Service Processor network
@@ -200,16 +206,17 @@ node_names:
 #  - { from_name: "{{ cluster }}-04", name: "{{ cluster }}04" }
 
 # Rename Aggregates section
+# root aggrs
 aggr0_names:
   - { name: 'aggr0_{{ cluster }}_01', rename: "aggr0_{{ cluster_aggr }}01", mirror: true }
   - { name: 'aggr0_{{ cluster }}_02', rename: "aggr0_{{ cluster_aggr }}02", mirror: true }
 #  - { name: 'aggr0_{{ cluster }}_03', rename: "aggr0_{{ cluster }}03" }
 #  - { name: 'aggr0_{{ cluster }}_04', rename: "aggr0_{{ cluster }}04" }
 
+# data aggrs
 aggr_names:
   - { name: 'aggr0_{{ cluster }}_01', rename: "aggr1_{{ cluster_aggr }}01" }
   - { name: 'aggr0_{{ cluster }}_02', rename: "aggr1_{{ cluster_aggr }}02" }
-
 
 # Rename root volume section
 #vol0_list:
