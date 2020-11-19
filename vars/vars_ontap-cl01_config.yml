@@ -15,11 +15,13 @@ node1:
   node_mgmt_ip: 192.168.7.181
   node_icl: 192.168.7.182
   cluster_intra: 169.254.23.240
+  svm_lif1: 192.168.7.185
 node2:
   dhcp_ip: 192.168.7.218
   node_mgmt_ip: 192.168.7.183
   node_icl: 192.168.7.184
   cluster_intra: 169.254.58.243
+  svm_lif1: 192.168.7.186
 
 mgmt_lifs:
   - { hostname: "{{ node1.dhcp_ip }}", node: "{{ cluster }}-01", name: "{{ cluster }}_mgmt", address: "{{ cluster_mgmt }}", netmask: "{{ subnet }}", role: cluster-mgmt, port: e0c }
@@ -139,11 +141,11 @@ lifs:  # interfaces for the Vservers being created
   # - { name: "{{ svm }}_data8", vserver: "{{ svm }}", node: "{{ cluster }}-02", port: e0g, protocol: nfs, address: 10.9.79.204, netmask: "{{ svm_netmask }}" }
 
   # - { name: "{{ svm }}_data1", vserver: "{{ svm }}", node: "{{ cluster }}-01", port: e3a, protocol: nfs, address: 10.9.79.197, netmask: "{{ svm_netmask }}" }
-  - { name: "{{ svm }}_data2", vserver: "{{ svm }}", node: "{{ cluster }}-01", port: e0d, protocol: nfs, address: 192.168.7.212, netmask: "{{ svm_netmask }}" }
+  - { name: "{{ svm }}_data2", vserver: "{{ svm }}", node: "{{ cluster }}-01", port: e0d, protocol: nfs, address: "{{ node1.svm_lif1 }}", netmask: "{{ svm_netmask }}" }
   # - { name: "{{ svm }}_data3", vserver: "{{ svm }}", node: "{{ cluster }}-01", port: e3b, protocol: nfs, address: 10.9.79.199, netmask: "{{ svm_netmask }}" }
   # - { name: "{{ svm }}_data4", vserver: "{{ svm }}", node: "{{ cluster }}-01", port: e0g, protocol: nfs, address: 10.9.79.200, netmask: "{{ svm_netmask }}" }
   # - { name: "{{ svm }}_data5", vserver: "{{ svm }}", node: "{{ cluster }}-02", port: e3a, protocol: nfs, address: 10.9.79.201, netmask: "{{ svm_netmask }}" }
-  - { name: "{{ svm }}_data6", vserver: "{{ svm }}", node: "{{ cluster }}-02", port: e0d, protocol: nfs, address: 192.168.7.217, netmask: "{{ svm_netmask }}" }
+  - { name: "{{ svm }}_data6", vserver: "{{ svm }}", node: "{{ cluster }}-02", port: e0d, protocol: nfs, address: "{{ node2.svm_lif1 }}", netmask: "{{ svm_netmask }}" }
   # - { name: "{{ svm }}_data7", vserver: "{{ svm }}", node: "{{ cluster }}-02", port: e3b, protocol: nfs, address: 10.9.79.203, netmask: "{{ svm_netmask }}" }
   # - { name: "{{ svm }}_data8", vserver: "{{ svm }}", node: "{{ cluster }}-02", port: e0g, protocol: nfs, address: 10.9.79.204, netmask: "{{ svm_netmask }}" }
 
