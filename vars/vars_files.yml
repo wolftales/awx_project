@@ -1,0 +1,32 @@
+netapp_hostname:  192.168.7.180
+netapp_username: admin
+netapp_password: netapp1234
+
+state:            present
+vserver:          svm_gcpcvo1
+
+# job schedule varibles
+sched_name:
+sched_min:
+sched_hr:
+sched_day:
+sched_mon:
+
+# volume varibles
+volname:          ansibleVolume
+aggrname:         aggr1
+size:             10
+size_unit:        gb
+e_policy:
+aqos_policy:
+export_policy:
+
+# snapshot varibles
+ss_policy: 1min
+ss_sched: 1min
+ss_prefix: 1min
+ss_count: 10
+ss_enable: true
+
+ss_fromname:
+ss_name:

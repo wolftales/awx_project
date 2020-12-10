@@ -3,8 +3,12 @@
   gather_facts: false
   collections:
   - netapp.ontap
+  vars_files:
+    - vars/vars_files.yml
   tasks:
-  - name: Display ONTAP_info All 
+
+  # ONTAP_INFO
+  - name: Display ONTAP_info All
     na_ontap_info:
       state: info
       hostname: "{{ netapp_hostname }}"
@@ -14,10 +18,11 @@
       validate_certs: false
       use_rest: Auto
       gather_subset:
-        - all
+        # - all
         # - volume_info
         # - lun_info
+        - snapshot_policy_info
     register: ontap_info
   - debug:
-      msg: "{{ ontap_info.ontap_info }}"
-
+      # msg: "{{ ontap_info.ontap_info }}"
+      msg: "{{ ontap_info.ontap_info.snapshot_policy_info }}"

@@ -1,0 +1,43 @@
+---
+- hosts: localhost
+  name: ONTAP Volume Snapshot Policy Mgmt
+  gather_facts: false
+  collections:
+  - netapp.ontap
+  vars:
+    state: present
+    ontap_endpoint_url: https://192.168.7.180/api
+  vars_files:
+    - vars/vars_files.yml
+  tasks:
+
+  # Set snapshot policy
+  # - name: run ontap rest cli command
+  #   na_ontap_rest_cli:
+  #     hostname: "{{ netapp_hostname }}"
+  #     username: "{{ netapp_username }}"
+  #     password: "{{ netapp_password }}"
+  #     https: true
+  #     validate_certs: false
+  #     # command: 'volume/snapshot/policy/show'
+  #     command: 'version'
+  #     verb: 'GET'
+  #     # params: {'policy': "{{ ss_name }}", 'enabled': "{{ ss_enable }}", 'schedule1': "{{ ss_name }}", 'prefix1': '{{ ss_prefix }}', 'count1': 'ss_count'}
+  #     body: {'message': 'test'}
+  #
+  #   register: response
+  # - debug:
+  #     msg: "{{ response }}"
+
+
+  - name: Set Volume Snapshot Policy
+    na_ontap_command:
+      hostname: "{{ netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+      return_dict: yes
+      command:        [ 'policy', "{{ ss_name }}", 'enabled', "{{ ss_enable }}",
+                        'schedule1', "{{ ss_name }}", 'prefix1', '{{ ss_prefix }}',
+                        'count1', '{{ ss_count }}' ]

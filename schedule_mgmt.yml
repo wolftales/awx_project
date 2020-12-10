@@ -1,0 +1,26 @@
+---
+- hosts: localhost
+  name: ONTAP Schedule Mgmt
+  gather_facts: false
+  vars:
+    state: present
+  vars_files:
+    - vars/vars_files.yml
+  tasks:
+
+  # Job Schedule
+  - name:                "{{ tower_job_template_name }}"
+    na_ontap_job_schedule:
+      state:             "{{ state }}"
+
+      name:              "{{ sched_name }}"
+      job_minutes:       "{{ sched_min | default(omit) }}"
+      # job_hours:         "{{ sched_hr | default(omit) }}"
+      # job_days_of_month: "{{ sched_day | default(omit) }}"
+      # job_months:        "{{ sched_mon | default(omit) }}"
+
+      hostname:       "{{ netapp_hostname }}"
+      username:       "{{ netapp_username }}"
+      password:       "{{ netapp_password }}"
+      https:          true
+      validate_certs: false
