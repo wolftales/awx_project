@@ -11,7 +11,22 @@
     - vars/vars_files.yml
   tasks:
 
-  # Set snapshot policy
+  ###
+  # Statistics: Enable client-stats example
+  ###
+
+  # - name: 'Enable -client-stats for statistics'
+  #   na_ontap_command:
+  #     <<: *login
+  #     privilege: 'advanced'
+  #
+  #     command:        [ 'statistics', 'settings', 'modify',
+  #                       '-client-stats', 'enable' ]
+
+  ###
+  # Snashot Policy: Settings volume policy API example
+  ###
+
   # - name: run ontap rest cli command
   #   na_ontap_rest_cli:
   #     hostname: "{{ netapp_hostname }}"
