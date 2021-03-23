@@ -192,7 +192,8 @@ ssh_publickey: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDseS4OJJUZQGO1sz8fp3Os/nZU
 ls_mirrors:
   # - { aggr: "{{ cluster_aggr }}_01_aggr1", name: "{{ svm_root }}_root_mir1", svm: "{{ svm }}" }
   # - { aggr: "{{ cluster_aggr }}_02_aggr1", name: "{{ svm_root }}_root_mir2", svm: "{{ svm }}" }
-  - { aggr: "{{ cluster | replace('-','_') }}_02_aggr1", name: "{{ svm | replace('-','_') }}_root_mir1", svm: "{{ svm }}" }
+  - { aggr: "{{ cluster | replace('-','_') }}_01_aggr1", name: "{{ svm | replace('-','_') }}_root_mir1", svm: "{{ svm }}" }
+  - { aggr: "{{ cluster | replace('-','_') }}_02_aggr1", name: "{{ svm | replace('-','_') }}_root_mir2", svm: "{{ svm }}" }
 
 
 ###
