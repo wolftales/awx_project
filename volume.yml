@@ -1,5 +1,5 @@
 - hosts: localhost
-  name: ONTAP
+  name: ONTAP Volume Management
   gather_facts: false
   vars:
     netapp_hostname: 192.168.7.190
