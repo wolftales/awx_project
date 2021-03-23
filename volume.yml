@@ -2,7 +2,7 @@
   name: ONTAP
   gather_facts: false
   vars:
-    netapp_hostname: "192.168.7.190"
+    netapp_hostname: 192.168.7.190
     volname: ansibleVolume
     vserver: ansible_vserver
     aggrname:
