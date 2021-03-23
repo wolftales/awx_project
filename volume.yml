@@ -2,13 +2,13 @@
   name: ONTAP
   gather_facts: false
   vars:
-    hostname: "172.32.0.152"
+    netapp_hostname: "192.168.7.190"
     volname: ansibleVolume
     vserver: ansible_vserver
     aggrname:
-    size: 10
-    aggr: aggr1
-    e_policy: 
+    size: 1
+    aggr: source_01_aggr1
+    e_policy:
     aqos_policy:
     export_policy:
     state: present

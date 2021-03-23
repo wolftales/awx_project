@@ -3,7 +3,7 @@
   collections:
   - netapp.ontap
   gather_facts: no
-  name: SnapMirror Configuration
+  name: SnapMirror Configuration for existing volume
   vars:
     input: &login
       hostname: "{{ dest_netapp_hostname }}"
