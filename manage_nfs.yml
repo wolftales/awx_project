@@ -1,10 +1,12 @@
 ---
 - hosts: localhost
   gather_facts: false
+  collections:
+    - netapp.ontap
   vars:
       state: "{{ state }}"
   tasks:
-    
+
   - name: Manage NFS Settings
     na_ontap_nfs:
       state: "{{ state }}"

@@ -2,6 +2,8 @@
 - hosts: localhost
   name: ONTAP Schedule Mgmt
   gather_facts: false
+  collections:
+    - netapp.ontap
   vars:
     state: present
   vars_files:

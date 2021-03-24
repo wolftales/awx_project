@@ -3,7 +3,7 @@
   name: "Build cluster: {{ cluster }}"
   gather_facts: false
   collections:
-    - netapp.ontap
+  - netapp.ontap
   vars_files:
   - vars/vars_ontap-cl01_config.yml
   vars:

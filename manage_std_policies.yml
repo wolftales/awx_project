@@ -1,10 +1,12 @@
 ---
 - hosts: localhost
   gather_facts: false
+  collections:
+    - netapp.ontap
   vars:
     state: "{{ state }}"
   tasks:
-    
+
   # Manage Export-policies - Create 'data' policy
   - name: '{{ Create if state == present else Delete }} Data SVM Export-policy'
     na_ontap_export_policy:
@@ -17,7 +19,7 @@
       https: true
       validate_certs: false
       when: state == 'present'
-  
+
   # Manage Export-policies - Add rules
   - name: '{{ Add if state == present else Remove }} Data SVM Export-policy rules'
     na_ontap_export_policy_rule:
@@ -35,7 +37,7 @@
       https: true
       validate_certs: false
     with_items: "{{ export_policy_rules_list }}"
-  
+
   # Manage Export-policies - Create 'data' policy
   - name: '{{ Create if state == present else Delete }} Data SVM Export-policy'
     na_ontap_export_policy:

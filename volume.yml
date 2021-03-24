@@ -1,6 +1,8 @@
 - hosts: localhost
   name: ONTAP Volume Management
   gather_facts: false
+  collections:
+    - netapp.ontap
   vars:
     netapp_hostname: 192.168.7.190
     volname: ansibleVolume
