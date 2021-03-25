@@ -28,6 +28,8 @@ dns:        # Set DNS for Cluster
 
 ntp:        # Set NTP Server (requires the cluster to have DNS set)
     - { server_name: "{{ ntp_srvr }}", version: auto }
+    - { server_name: pool.ntp.org , version: auto }
+    - { server_name: time.nist.gov , version: auto }
 
 snmp:       # Setup or modify an SNMP community
     - { community_name: public, access_control: ro }

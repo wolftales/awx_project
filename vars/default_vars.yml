@@ -25,6 +25,3 @@ dns_servers: 192.168.7.3
 svm_port: e0c
 svm_netmask: 255.255.255.0
 svm_gateway: 192.168.7.1  # To configure the default route/gateway for the vservers
-
-
-
