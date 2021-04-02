@@ -18,9 +18,9 @@ node2:
 
 # Authentification Defaults
 netapp_hostname:  "{{ cluster_mgmt }}"
-netapp_username: admin
-netapp_password: netapp1234     # Comment out to use vars_prompt
-validate_certs: false           # Set the default
+netapp_username:  admin
+netapp_password:  netapp1234     # Comment out to use vars_prompt
+validate_certs:   false           # Set the default
 
 # DNS Services Settings
 dns_domain: example.local
