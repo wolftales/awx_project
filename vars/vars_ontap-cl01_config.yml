@@ -44,8 +44,8 @@ dns_srvrs: 192.168.7.3
 # NTP & Timezone Settings
 # time: time.apple.com
 # time: time.google.com
-# time: time.nist.gov
-time: time.example.local
+time: time.nist.gov
+# time: time.example.local
 tzone: 'GMT'
 # tzone: 'ETC/GMT'           #  <Area/Location Timezone> - Specified in the Olson format
 # tzone: 'US/Pacific'           #  <Area/Location Timezone> - Specified in the Olson format
