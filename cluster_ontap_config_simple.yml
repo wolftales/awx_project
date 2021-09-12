@@ -160,7 +160,7 @@
       protocol: "{{ item.protocol }}"
       ro_rule: "{{ item.ro_rule }}"
       rw_rule: "{{ item.rw_rule }}"
-      rule_index: "{{ item.rule_index | default(omit)}}"
+      rule_index: "{{ item.rule_index | default(omit) }}"
       super_user_security: "{{ item.super_user_security }}"
       <<: *login
     loop: "{{ export_policy_rules_list }}"

@@ -148,7 +148,7 @@ ifgrps: # Create and add ports to Interface Groups.
       mtu: 9000,
     }
 
-vlans:# Create vlans on LIFS
+vlans: # Create vlans on LIFS
   # - { id: "{{ vlan_id }}", node: "{{ cluster }}-01", parent: a0a }
   # - { id: "{{ vlan_id }}", node: "{{ cluster }}-02", parent: a0a }
 
