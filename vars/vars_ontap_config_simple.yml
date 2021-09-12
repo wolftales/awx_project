@@ -87,7 +87,7 @@ bcd_split_ports:
 # Networking Varibles - Update port members for 'ifgrp' config below
 # ifgrp_ports: "e0d,e3a"
 ifgrp_ports: "e0d"  # VSIM only has e0c, e0d by default
-vlan_id: 42 # Replace with VLAN ID
+vlan_id: 42  # Replace with VLAN ID
 
 ###
 # Role-Based: Standard Config
