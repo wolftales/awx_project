@@ -81,7 +81,7 @@ bcd_split_ports:
   - {
       origin_bd: Default,
       new_bd: "{{ bd.mgmt }}",
-      ports: '["{{ cluster }}-01:e0M", "{{ cluster }}-02:e0M"]',
+      ports: '["{{ cluster }}-01:e0c", "{{ cluster }}-02:e0c"]',
     }
 
 # Networking Varibles - Update port members for 'ifgrp' config below
