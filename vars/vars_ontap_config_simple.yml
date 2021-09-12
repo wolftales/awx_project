@@ -81,11 +81,12 @@ bcd_split_ports:
   - {
       origin_bd: Default,
       new_bd: "{{ bd.mgmt }}",
-      ports: '["{{ cluster }}-01:e0c", "{{ cluster }}-02:e0c"]',
+      ports: '["{{ cluster }}-01:e0c", "{{ cluster }}-02:e0c"]',  # Use e0M on appliance based ONTAP systems
     }
 
 # Networking Varibles - Update port members for 'ifgrp' config below
-ifgrp_ports: "e0d,e3a"
+# ifgrp_ports: "e0d,e3a"
+ifgrp_ports: "e0d"  # VSIM only has e0c, e0d by default
 vlan_id: 42 # Replace with VLAN ID
 
 ###
@@ -125,12 +126,12 @@ aggrs: # Create one or more Aggregates.
 ports: # Set MTU for ports
   - { node: "{{ cluster }}-01", port: e0d, mtu: 1500, flowcontrol: none }
   - { node: "{{ cluster }}-01", port: e0e, mtu: 1500, flowcontrol: none }
-  - { node: "{{ cluster }}-01", port: e3a, mtu: 1500, flowcontrol: none }
-  - { node: "{{ cluster }}-01", port: e3b, mtu: 1500, flowcontrol: none }
+  # - { node: "{{ cluster }}-01", port: e3a, mtu: 1500, flowcontrol: none }
+  # - { node: "{{ cluster }}-01", port: e3b, mtu: 1500, flowcontrol: none }
   - { node: "{{ cluster }}-02", port: e0d, mtu: 1500, flowcontrol: none }
   - { node: "{{ cluster }}-02", port: e0e, mtu: 1500, flowcontrol: none }
-  - { node: "{{ cluster }}-02", port: e3a, mtu: 1500, flowcontrol: none }
-  - { node: "{{ cluster }}-02", port: e3b, mtu: 1500, flowcontrol: none }
+  # - { node: "{{ cluster }}-02", port: e3a, mtu: 1500, flowcontrol: none }
+  # - { node: "{{ cluster }}-02", port: e3b, mtu: 1500, flowcontrol: none }
 
 ifgrps: # Create and add ports to Interface Groups.
   - {
