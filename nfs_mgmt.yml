@@ -27,7 +27,7 @@
       nfsv41: "{{ nfsv41 }}"
       tcp: "{{ tcp }}"
       udp: "{{ udp }}"
-      vstorage_state: vstorage_state
+      vstorage_state: "{{ vstorage_state }}"
       hostname: "{{ netapp_hostname }}"
       username: "{{ netapp_username }}"
       password: "{{ netapp_password }}"
