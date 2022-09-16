@@ -4,6 +4,7 @@
   collections:
     - netapp.ontap
   vars:
+    netapp_hostname: 192.168.7.200
     state:  present
     svm:    ontap-vs01
     export_policy_name: data
