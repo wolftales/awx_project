@@ -13,6 +13,7 @@
     e_policy:
     aqos_policy:
     export_policy:
+    unix_permissions: ---rwxr-xr-x
     
   tasks:
   - name: "{{ tower_job_template_name }}"
@@ -26,6 +27,7 @@
       junction_path: "/{{ '' if not export_policy else volname }}"
       space_guarantee: "none"
       vserver: "{{ vserver }}"
+      unix_permissions: "{{ unix_permissions }}"
       hostname: "{{ netapp_hostname }}"
       username: "{{ netapp_username }}"
       password: "{{ netapp_password }}"
