@@ -4,14 +4,14 @@
   collections:
     - netapp.ontap
   vars:
-    state:  "{{ state }}"
+    state:  present
     svm:    ontap-vs01
-    export_policy_name: default
-    client_match: "{{ client_match }}"
-    ro_rule:      "{{ ro_rule }}"
-    rw_rule:      "{{ rw_rule }}"
-    rule_index:   "{{ rule_index }}"
-    super_user:   "{{ super_user }}"
+    export_policy_name: data
+    rule_index:   1
+    client_match: 0.0.0.0/0
+    ro_rule:      sys
+    rw_rule:      sys
+    super_user:   sys
 
   tasks:
 
