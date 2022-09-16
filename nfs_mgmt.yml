@@ -11,7 +11,9 @@
       nfsv3:  enabled
       nfsv4:  enabled
       nfsv41: enabled
+      showmount: enabled
       tcp:    enabled
+      tcp_max_xfer_size : 65536
       udp:    disabled
       vstorage_state: disabled
       
@@ -25,7 +27,9 @@
       nfsv3: "{{ nfsv3 }}"
       nfsv4: "{{ nfsv4 }}"
       nfsv41: "{{ nfsv41 }}"
+      showmount: "{{ showmount }}"
       tcp: "{{ tcp }}"
+      tcp_max_xfer_size: "{{ tcp_max_xfer_size }}"
       udp: "{{ udp }}"
       vstorage_state: "{{ vstorage_state }}"
       hostname: "{{ netapp_hostname }}"
