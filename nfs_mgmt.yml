@@ -4,9 +4,9 @@
   collections:
     - netapp.ontap
   vars:
-      state: "{{ state }}"
+      state: present
       service_state: started
-      vserver: "{{ svm }}"
+      svm:    ontap-vs01
       nfsv3:  enabled
       nfsv4:  enabled
       nfsv41: enabled
