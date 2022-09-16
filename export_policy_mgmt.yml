@@ -14,7 +14,7 @@
     rw_rule:      sys
     super_user:   sys
     protocol:     nfs
-    anonymous_user_id: 65534
+    anonymous_uid: 65534
     allow_suid: true
     ntfs_unix_security: ignore
 
@@ -45,7 +45,7 @@
       rw_rule: "{{ rw_rule }}"
       super_user_security: "{{ super_user }}"
       protocol: "{{ protocol }}"
-      anonymous_user_id: "{{ anonymous_user_id }}"
+      anonymous_user_id: "{{ anonymous_uid }}"
       allow_suid: "{{ allow_suid }}"
       ntfs_unix_security: "{{ ntfs_unix_security }}"
       hostname: "{{ netapp_hostname }}"
