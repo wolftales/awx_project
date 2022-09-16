@@ -1,0 +1,34 @@
+---
+- hosts: localhost
+  gather_facts: false
+  collections:
+    - netapp.ontap
+  vars:
+      state: "{{ state }}"
+      service_state: started
+      vserver: "{{ svm }}"
+      nfsv3:  enabled
+      nfsv4:  enabled
+      nfsv41: enabled
+      tcp:    enabled
+      udp:    disabled
+      vstorage_state: disabled
+      
+  tasks:
+
+  - name: Manage NFS Settings
+    na_ontap_nfs:
+      state: "{{ state }}"
+      service_state: "{{ service_state }}"
+      vserver: "{{ svm }}"
+      nfsv3: "{{ nfsv3 }}"
+      nfsv4: "{{ nfsv4 }}"
+      nfsv41: "{{ nfsv41 }}"
+      tcp: "{{ tcp }}"
+      udp: "{{ udp }}"
+      vstorage_state: vstorage_state
+      hostname: "{{ netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false

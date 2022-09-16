@@ -5,15 +5,15 @@
     - netapp.ontap
   vars:
     netapp_hostname: 192.168.7.190
+    state: present
     volname: ansibleVolume
     vserver: ansible_vserver
-    aggrname:
+    aggrname: source_01_aggr1
     size: 1
-    aggr: source_01_aggr1
     e_policy:
     aqos_policy:
     export_policy:
-    state: present
+    
   tasks:
   - name: "{{ tower_job_template_name }}"
     netapp.ontap.na_ontap_volume:
