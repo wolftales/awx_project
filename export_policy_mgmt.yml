@@ -27,7 +27,7 @@
       password: "{{ netapp_password }}"
       https: true
       validate_certs: false
-      when: state == 'present'
+    when: state == 'present'
 
   # Manage Export-policies - Add rules
   - name: '{{ Add if state == present else Remove }} Data SVM Export-policy rules'
