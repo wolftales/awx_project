@@ -13,6 +13,10 @@
     ro_rule:      sys
     rw_rule:      sys
     super_user:   sys
+    protocol:     nfs
+    anonymous_user_id: 65534
+    allow_suid: true
+    ntfs_unix_security: ignore
 
   tasks:
 
@@ -40,6 +44,10 @@
       ro_rule: "{{ ro_rule }}"
       rw_rule: "{{ rw_rule }}"
       super_user_security: "{{ super_user }}"
+      protocol: "{{ protocol }}"
+      anonymous_user_id: "{{ anonymous_user_id }}"
+      allow_suid: "{{ allow_suid }}"
+      ntfs_unix_security: "{{ ntfs_unix_security }}"
       hostname: "{{ netapp_hostname }}"
       username: "{{ netapp_username }}"
       password: "{{ netapp_password }}"
