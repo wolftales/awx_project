@@ -22,7 +22,7 @@
       validate_certs: false
     state:    present
     netapp_hostname: 192.168.7.190
-    vserver:  ansible_vserver
+    svm:      ansible_vserver
     aggrname: 
     volname:  ansibleVolume
 
