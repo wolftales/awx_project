@@ -16,12 +16,8 @@ vlan_id: 201  # Create vlans on LIFS
 inters_lif1_mask: 255.255.255.0
 
 # AWX extra vars for var_file vserver_config
-
-validate_certs: false
 svm: destination
 svm_aggregate: "{{ cluster }}_01_aggr1"
-dns_domain: example.local
-dns_servers: 192.168.7.3
 svm_port: e0c
 svm_netmask: 255.255.255.0
 svm_gateway: 192.168.7.1  # To configure the default route/gateway for the vservers
