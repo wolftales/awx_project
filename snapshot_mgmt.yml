@@ -6,8 +6,8 @@
   vars:
     netapp_hostname: 192.168.7.190
     state:    present
+    vserver:  vs01
     volname:  ansibleVolume
-    vserver:  ansible_vserver
     comment:  
     snapshot_name: 
     from_name: 
