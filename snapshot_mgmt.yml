@@ -1,0 +1,32 @@
+- hosts: localhost
+  name: ONTAP Volume Snapshot Management
+  gather_facts: false
+  collections:
+    - netapp.ontap
+  vars:
+    netapp_hostname: 192.168.7.190
+    state: present
+    volname: ansibleVolume
+    vserver: ansible_vserver
+    comment: "i am a comment"
+    snapshot_name: 
+    expiry_time: "2022-02-04T14:00:00-05:00"
+    
+  tasks:
+
+  - name: "{{ tower_job_template_name }}"
+    netapp.ontap.na_ontap_snapshot:
+      hostname: "{{ netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+
+      state:    "{{ state }}"
+      vserver: "{{ vserver }}"
+      snapshot: "{{ snapshot name }}"
+      volume:   "{{ volname }}"
+      comment:  "{{ comment }}"
+      expiry_time: "{{ expiry_time }}"
+
+
