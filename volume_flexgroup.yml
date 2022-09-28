@@ -55,9 +55,9 @@
       space_guarantee:    "{{ space_guarantee | default('none') }}"
       
       snapshot_policy:    "{{ ss_policy | default('default') }}"
-      policy:      "{{ export_policy | default('default') }}"
+      policy:      "{{ export_policy | default('default') }}"  # export_policy error out
       # export_policy:      "{{ export_policy | default('default') }}"
-      tiering_policy:     "{{ tiering_policy | default('omit')  }}"
+      tiering_policy:     "{{ tiering_policy | default('none')  }}"
       efficiency_policy:  "{{ e_policy | default('omit')  }}"
       unix_permissions:   "{{ unix_permissions | default('omit')  }}"
       qos_adaptive_policy_group: "{{ aqos_policy | default('none')  }}"
