@@ -25,6 +25,14 @@
     svm:      ansible_vserver
     aggrname: 
     volname:  ansibleVolume
+    junction: 
+    space_guarantee: none
+    ss_policy: default
+    export_policy: 
+    e_policy:
+    tiering_policy: 
+    aqos_policy:
+    unix_permissions: ---rwxr-xr-x  # unix_permissions: 777
 
     fg:
       name: fg_auto_01
@@ -43,6 +51,16 @@
       
       state:              "{{ state }}"
       vserver:            "{{ svm }}"
+      junction_path:      "/{{ junction if junction else volname }}"
+      space_guarantee:    "{{ space_guarantee | default('none') }}"
+      
+      snapshot_policy:    "{{ ss_policy | default('default') }}"
+      export_policy:      "{{ export_policy | default('default') }}"
+      tiering_policy:     "{{ tiering_policy | default('omit')  }}"
+      efficiency_policy:  "{{ e_policy | default('omit')  }}"
+      unix_permissions:   "{{ unix_permissions | default('omit')  }}"
+      qos_adaptive_policy_group: "{{ aqos_policy | default('none')  }}"
+
 
       name:               "{{ fg.name }}"
       auto_provision_as:  flexgroup
