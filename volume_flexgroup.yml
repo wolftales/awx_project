@@ -30,7 +30,7 @@
     ss_policy: default
     export_policy: 
     e_policy:
-    tiering_policy: 
+    tiering_policy: none
     aqos_policy:
     unix_permissions: ---rwxr-xr-x  # unix_permissions: 777
 
@@ -57,7 +57,7 @@
       snapshot_policy:    "{{ ss_policy | default('default') }}"
       policy:      "{{ export_policy | default('default') }}"  # export_policy error out
       # export_policy:      "{{ export_policy | default('default') }}"
-      tiering_policy:     "{{ tiering_policy | default('none')  }}"
+      tiering_policy:     "{{ tiering_policy }}"
       efficiency_policy:  "{{ e_policy | default('omit')  }}"
       unix_permissions:   "{{ unix_permissions | default('omit')  }}"
       qos_adaptive_policy_group: "{{ aqos_policy | default('none')  }}"
