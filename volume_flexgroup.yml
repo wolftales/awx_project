@@ -20,25 +20,30 @@
       password: "{{ netapp_password }}"
       https: true
       validate_certs: false
-    state:    present
-    netapp_hostname: 192.168.7.190
-    svm:      ansible_vserver
+    state:            present
+    netapp_hostname:  192.168.7.190
+    svm:              ansible_vserver
+    volname:          ansibleVolume
+    fg_autoprovision:  flexgroup
     aggrname: 
-    volname:  ansibleVolume
+    aggr_list: 
+    aggr_list_multiplier: 
+    size:             1  # 800GB is minimum of a flexgroup
+    size_unit:        tb
     junction: 
-    space_guarantee: none
-    snapshot_policy: default
-    snap_reserve: 5
-    export_policy: default
+    space_guarantee:  none
+    snapshot_policy:  default
+    snap_reserve:     5
+    export_policy:    default
     e_policy:
-    tiering_policy: none
+    tiering_policy:   none
     aqos_policy:
     unix_permissions: ---rwxr-xr-x  # unix_permissions: 777
 
-    fg:
-      name: fg_auto_01
-      size: 200
-      size_unit: tb
+    # fg:
+    #   name: fg_auto_01
+    #   size: 200
+    #   size_unit: tb
 
   tasks:
 
@@ -52,6 +57,8 @@
       
       state:              "{{ state }}"
       vserver:            "{{ svm }}"
+      aggr_list:          "{{ aggr_list | default('omit') }}"
+      aggr_list_multiplier: "{{ aggr_list_multiplier | default('omit') }}"
       junction_path:      "/{{ junction if junction else volname }}"
       space_guarantee:    "{{ space_guarantee | default('none') }}"
       snapshot_policy:    "{{ snapshot_policy }}"
@@ -64,7 +71,7 @@
       qos_adaptive_policy_group: "{{ aqos_policy | default('omit')  }}"
 
 
-      name:               "{{ fg.name }}"
-      auto_provision_as:  flexgroup
-      size:               "{{ fg.size }}"
-      size_unit:          "{{ fg.size_unit }}"
+      name:               "{{ volname }}"
+      auto_provision_as:  "{{ fg_autoprovision }}"
+      size:               "{{ size }}"
+      size_unit:          "{{ size_unit }}"
