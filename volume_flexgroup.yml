@@ -29,7 +29,7 @@
     aggr_list: 
     aggr_list_multiplier: 
     size:             1  # 800GB is minimum of a flexgroup
-    size_unit:        tb
+    size_unit:        gb
     junction: 
     space_guarantee:  none
     snapshot_policy:  default
