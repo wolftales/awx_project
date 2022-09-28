@@ -57,8 +57,8 @@
       
       state:              "{{ state }}"
       vserver:            "{{ svm }}"
-      aggr_list:          "{{ aggr_list | default('none') }}"
-      aggr_list_multiplier: "{{ aggr_list_multiplier | default('omit') }}"
+      # aggr_list:          "{{ aggr_list | default('none') }}"
+      # aggr_list_multiplier: "{{ aggr_list_multiplier | default('omit') }}"  # Geting STR error
       junction_path:      "/{{ junction if junction else volname }}"
       space_guarantee:    "{{ space_guarantee | default('none') }}"
       snapshot_policy:    "{{ snapshot_policy }}"
