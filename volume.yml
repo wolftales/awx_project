@@ -6,10 +6,11 @@
   vars:
     netapp_hostname: 192.168.7.190
     state: present
-    volname: ansibleVolume
     vserver: ansible_vserver
     aggrname: source_01_aggr1
+    volname: ansibleVolume
     size: 1
+    junction_path: "/{{ volname }}"
     e_policy:
     aqos_policy:
     export_policy:
@@ -24,7 +25,7 @@
       size: "{{ size }}"
       size_unit: gb
       policy: "{{ export_policy | default('default') }}"
-      junction_path: "/{{ volname if not export_policy else volname }}"
+      junction_path: "/{{ volname if not junction_path else volname }}"
       space_guarantee: "none"
       vserver: "{{ vserver }}"
       unix_permissions: "{{ unix_permissions }}"
