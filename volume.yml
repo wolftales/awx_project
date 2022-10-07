@@ -26,7 +26,7 @@
       size: "{{ size }}"
       size_unit: "{{ size_unit }}"
       policy: "{{ export_policy | default('default') }}"
-      junction_path: "/{{ volname if not junction_path else volname }}"
+      junction_path: "/{{ junction_path if junction_path else volname }}"
       space_guarantee: "none"
       vserver: "{{ vserver }}"
       unix_permissions: "{{ unix_permissions }}"
