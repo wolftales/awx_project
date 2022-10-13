@@ -1,0 +1,55 @@
+---
+- hosts: localhost
+  collections:
+  - netapp.ontap
+  gather_facts: no
+  name: SnapMirror Configuration for existing volume
+  vars:
+    input: &login
+      hostname: "{{ dest_netapp_hostname }}"
+      username: "{{ netapp_username }}"
+      password: "{{ netapp_password }}"
+      https: true
+      validate_certs: false
+    state: present
+    vserver: ansible_vserver
+    comment: 
+    common_snapshot_schedule:  
+    ignore_atime: 
+    is_network_compression_enabled: 
+    owner:
+    policy_name: "ansible_policy"
+    policy_type: "mirror_vault"
+    snapmirror_label: ['daily', 'weekly', 'monthly']
+    keep: [7, 5, 12]
+    restart: 
+    schedule: ['','weekly','monthly']
+    prefix: ['','','monthly_mv']
+    transfer_priority: 
+    tries: 
+
+  tasks:
+
+# SnapMirror Configuration
+
+  - name: Create SnapMirror policy with rules and schedules (no schedule for daily rule)
+    na_ontap_snapmirror_policy:
+      <<: *login
+
+      state:                          "{{ state }}"
+      vserver:                        "{{ vserver }}"
+
+      comment:                        "{{ comment | default(omit) }}"
+      common_snapshot_schedule:       "{{ common_snapshot_schedule | default(omit) }}" 
+      ignore_atime:                   "{{ ignore_atime | default('false') }}"
+      is_network_compression_enabled: "{{ is_network_compression_enabled  | default('false') }}"
+      keep:                           "{{ keep }}"
+      owner:                          "{{ owner }}"
+      policy_name:                    "{{ policy_name }}"
+      policy_type:                    "{{ policy_type }}"
+      prefix:                         "{{ prefix }}"
+      restart:                        "{{ restart }}"
+      schedule:                       "{{ schedule }}"
+      snapmirror_label:               "{{ snapmirror_label }}"
+      transfer_priority:              "{{ transfer_priority | default(omit) }}"
+      tries:                          "{{ tries | default(omit) }}"

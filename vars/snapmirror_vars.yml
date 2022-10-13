@@ -3,7 +3,7 @@
 passphrase: seespotrun
 
 # destination cluster
-dest_cluster: dest97
+dest_cluster: secondary
 dest_svm: destination
 dest_netapp_hostname: 192.168.7.195
 dest_intercluster_lif: 192.168.7.197
@@ -13,7 +13,7 @@ peer_cluster: "{{ dest_cluster }}"
 
 
 # source cluster
-source_cluster: sour97
+source_cluster: primary
 source_svm: source
 source_netapp_hostname: 192.168.7.190
 source_intercluster_lif: 192.168.7.192
@@ -21,7 +21,7 @@ source_intercluster_lif: 192.168.7.192
 
 # Snapmirror volume test parameters
 dest_volname: "{{ volname }}"
-dest_aggr: "dest97_01_aggr1"
+dest_aggr: "secondary_01_aggr1"
 dest_vol_size: 1
 dest_vol_size_units: gb
 # volname: "{{ dest_cluster }}"
