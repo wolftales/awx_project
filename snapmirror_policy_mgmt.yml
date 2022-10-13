@@ -22,7 +22,7 @@
     policy_type: "mirror_vault"
     snapmirror_label: ['daily', 'weekly', 'monthly']
     keep:         [7, 5, 12]
-    restart:      false
+    restart:      default
     schedule:     ['','weekly','monthly']
     prefix:       ['','','monthly_mv']
     transfer_priority: low
