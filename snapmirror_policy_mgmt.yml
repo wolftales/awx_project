@@ -25,7 +25,7 @@
     restart:      false
     schedule:     ['','weekly','monthly']
     prefix:       ['','','monthly_mv']
-    transfer_priority: 
+    transfer_priority: low
     tries: 
 
   tasks:
