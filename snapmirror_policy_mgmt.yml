@@ -6,13 +6,13 @@
   name: SnapMirror Configuration for existing volume
   vars:
     input: &login
-      hostname: "{{ dest_netapp_hostname }}"
+      hostname: "{{ netapp_hostname }}"
       username: "{{ netapp_username }}"
       password: "{{ netapp_password }}"
       https: true
       validate_certs: false
-    state: present
-    vserver: ansible_vserver
+    state:        present
+    vserver:      ansible_vserver
     comment: 
     common_snapshot_schedule:  
     ignore_atime: 
@@ -21,10 +21,10 @@
     policy_name: "ansible_policy"
     policy_type: "mirror_vault"
     snapmirror_label: ['daily', 'weekly', 'monthly']
-    keep: [7, 5, 12]
+    keep:         [7, 5, 12]
     restart: 
-    schedule: ['','weekly','monthly']
-    prefix: ['','','monthly_mv']
+    schedule:     ['','weekly','monthly']
+    prefix:       ['','','monthly_mv']
     transfer_priority: 
     tries: 
 
@@ -43,13 +43,13 @@
       common_snapshot_schedule:       "{{ common_snapshot_schedule | default(omit) }}" 
       ignore_atime:                   "{{ ignore_atime | default('false') }}"
       is_network_compression_enabled: "{{ is_network_compression_enabled  | default('false') }}"
-      keep:                           "{{ keep }}"
-      owner:                          "{{ owner }}"
+      keep:                           "{{ keep | default(omit) }}"
+      owner:                          "{{ owner | default('cluster') }}"
       policy_name:                    "{{ policy_name }}"
-      policy_type:                    "{{ policy_type }}"
-      prefix:                         "{{ prefix }}"
-      restart:                        "{{ restart }}"
-      schedule:                       "{{ schedule }}"
-      snapmirror_label:               "{{ snapmirror_label }}"
+      policy_type:                    "{{ policy_type | default(omit) }}"
+      prefix:                         "{{ prefix | default(omit) }}"
+      restart:                        "{{ restart | default(omit) }}"
+      schedule:                       "{{ schedule | default(omit) }}"
+      snapmirror_label:               "{{ snapmirror_label | default(omit) }}"
       transfer_priority:              "{{ transfer_priority | default(omit) }}"
       tries:                          "{{ tries | default(omit) }}"
