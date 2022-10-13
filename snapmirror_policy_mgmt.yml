@@ -15,14 +15,14 @@
     vserver:      ansible_vserver
     comment: 
     common_snapshot_schedule:  
-    ignore_atime: 
-    is_network_compression_enabled: 
+    ignore_atime: false
+    is_network_compression_enabled: false
     owner:
     policy_name: "ansible_policy"
     policy_type: "mirror_vault"
     snapmirror_label: ['daily', 'weekly', 'monthly']
     keep:         [7, 5, 12]
-    restart: 
+    restart:      false
     schedule:     ['','weekly','monthly']
     prefix:       ['','','monthly_mv']
     transfer_priority: 
