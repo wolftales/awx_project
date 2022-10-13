@@ -17,7 +17,7 @@
     common_snapshot_schedule:  
     ignore_atime: false
     is_network_compression_enabled: false
-    owner:
+    owner:        cluster_admin
     policy_name: "ansible_policy"
     policy_type: "mirror_vault"
     snapmirror_label: ['daily', 'weekly', 'monthly']
