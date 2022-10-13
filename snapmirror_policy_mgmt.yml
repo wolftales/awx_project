@@ -41,8 +41,8 @@
 
       comment:                        "{{ comment | default(omit) }}"
       common_snapshot_schedule:       "{{ common_snapshot_schedule | default(omit) }}" 
-      ignore_atime:                   "{{ ignore_atime | default('false') }}"
-      is_network_compression_enabled: "{{ is_network_compression_enabled  | default('false') }}"
+      ignore_atime:                   "{{ ignore_atime | default(false) }}"
+      is_network_compression_enabled: "{{ is_network_compression_enabled  | default(false) }}"
       keep:                           "{{ keep | default(omit) }}"
       owner:                          "{{ owner | default('cluster') }}"
       policy_name:                    "{{ policy_name }}"
