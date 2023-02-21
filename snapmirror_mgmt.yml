@@ -19,7 +19,7 @@
 # SnapMirror Configuration
 
   - name: Create Destination Volume
-    na_ontap_volume:
+    netapp.contap.na_ontap_volume:
       state: "{{ state }}"
       name: "{{ dest_volname }}"
       aggregate_name: "{{ dest_aggr }}"
@@ -35,7 +35,7 @@
 # SnapMirror Configuration on Destination
 
   - name: "{{ 'Create' if state == 'present' else 'Destroy' }} SnapMirror relationship on Destination"
-    na_ontap_snapmirror:
+    netapp.contap.na_ontap_snapmirror:
       state: "{{ state }}"
       source_vserver: "{{ source_svm }}"
       source_volume: "{{ volname }}"
